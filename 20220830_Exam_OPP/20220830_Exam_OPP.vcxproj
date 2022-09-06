@@ -128,9 +128,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="20220830_Exam_OPP.cpp" />
+    <ClCompile Include="ArrayMenu.cpp" />
     <ClCompile Include="ManipulCursor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArrayMenu.h" />
     <ClInclude Include="ManipulCursor.h" />
     <ClInclude Include="Menu.h" />
   </ItemGroup>

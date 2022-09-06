@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MENU_H
+#define MENU_H
+
 #include <windows.h>
 #include <vector>
 #include <iostream>
@@ -17,7 +19,7 @@ enum HorizontalAlignment
 class Menu
 {
 public:
-	static int select_vertical(std::vector<std::string> menu, HorizontalAlignment ha, int y = 12)
+	static int select_vertical(std::vector<std::string> menu, HorizontalAlignment ha = HorizontalAlignment::Left, int y = 0)
 	{
 		HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 		CONSOLE_SCREEN_BUFFER_INFO start_attribute;
@@ -99,6 +101,8 @@ public:
 		for (int i{}; i < menu.size(); i++)
 			max_len += menu[i].length();
 		if (max_len > 80 - menu.size() - 1)
-			int a = 1;/////////
+			int a = 1;
 	}
 };
+
+#endif // !MENU_H
