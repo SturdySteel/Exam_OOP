@@ -18,5 +18,16 @@
     <ClCompile Include="20220830_Exam_OPP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ManipulCursor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ManipulCursor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
