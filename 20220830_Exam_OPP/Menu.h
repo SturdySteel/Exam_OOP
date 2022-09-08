@@ -19,7 +19,7 @@ enum HorizontalAlignment
 class Menu
 {
 public:
-	static int select_vertical(std::vector<std::string> menu, HorizontalAlignment ha = HorizontalAlignment::Left, int y = 0)
+	static int select_vertical(std::vector<std::string> menu, HorizontalAlignment ha = HorizontalAlignment::Left, int y = 2)
 	{
 		HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 		CONSOLE_SCREEN_BUFFER_INFO start_attribute;

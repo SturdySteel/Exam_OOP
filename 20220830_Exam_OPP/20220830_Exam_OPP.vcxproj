@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,11 +131,15 @@
     <ClCompile Include="20220830_Exam_OPP.cpp" />
     <ClCompile Include="ArrayMenu.cpp" />
     <ClCompile Include="ManipulCursor.cpp" />
+    <ClCompile Include="sqlite3\sqlite3.c" />
+    <ClCompile Include="UserTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArrayMenu.h" />
     <ClInclude Include="ManipulCursor.h" />
+    <ClInclude Include="MD5.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="UserTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
