@@ -7,12 +7,12 @@
 #include <vector>
 //#include "sqlite3/sqlite3.h"
 #include "ArrayMenu.h"
-#include "SubMenu.h"
+//#include "SubMenu.h"
 #include "MD5.h"
 #include "UserData.h"
 #include "UserTest.h"
 #include "UserLogin.h"
-#include "queryDB.h"
+//#include "queryDB.h"
 //#include "Menu.h"
 
 //std::string dbName{ "db/testsystem.db" };
@@ -137,8 +137,17 @@ int main()
 {
     setlocale(LC_ALL, "ru");
 
-	menuMain(mainMenu);
-    //std::cout << "non exit\n";
+    UserLogin user;
+
+	user.menuMain(mainMenu);
+
+    std::cout << std::setw(15) << "id = " << user.id << "\n";
+    std::cout << std::setw(15) << "log = " << user.getLogin() << "\n";
+    std::cout << std::setw(15) << "pass/hash = " << user.getPass() << "\n";
+    std::cout << std::setw(15) << "su = " << user.getSU() << "\n";
+    user.getDataUL().show();
+
+
 
     /*std::string str{"123456"};
     std::string user{ "test005" };

@@ -9,7 +9,7 @@ enum ConsoleColor
 };
 
 void setColor(int text, int background);
-void setColor(ConsoleColor text, ConsoleColor background);
+void setColor(ConsoleColor text, ConsoleColor background = ConsoleColor::Black);
 void setPosition(int x, int y);
 
 #endif // !MANIPULCURSOR_H
