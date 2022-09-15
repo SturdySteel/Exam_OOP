@@ -48,8 +48,21 @@ std::vector<std::string> userMenu
 //	"Возврат"
 //};
 
+//class ShowMenu
+//{
+//private:
+//	std::vector<std::string> menu;
+//	bool mainM;
+//
+//public:
+//	ShowMenu(std::vector<std::string> menu, bool mainM = false) :
+//		menu{ menu },
+//		mainM{ mainM }
+//	{}
+//
+//	void menu(std::vector<std::string> menu);
+//	
+//};
 
 
 #endif // !ARRAYMENU_H
-
-

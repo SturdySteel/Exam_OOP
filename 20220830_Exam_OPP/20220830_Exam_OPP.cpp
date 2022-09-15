@@ -1,123 +1,184 @@
-#include<iostream>
-#include<string>
-#include<cstring>
-#include<stdlib.h>
-#include<sstream>
-#include"sqlite3/sqlite3.h"
-#include"Menu.h"
-#include"ArrayMenu.h"
-#include"MD5.h"
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cstring>
+#include <stdlib.h>
+#include <sstream>
+#include <vector>
+//#include "sqlite3/sqlite3.h"
+#include "ArrayMenu.h"
+#include "SubMenu.h"
+#include "MD5.h"
+#include "UserData.h"
+#include "UserTest.h"
+#include "UserLogin.h"
+#include "queryDB.h"
+//#include "Menu.h"
 
-std::string dbName{ "db/testsystem.db" };
+//std::string dbName{ "db/testsystem.db" };
 
-void menu()
-{
-	while (true)
-	{
-		system("cls");
-		int c = Menu::select_vertical({ "Show",	"Save",	"Load",	"Exit" });
-		switch (c)
-		{
-		case 0: 
-			system("pause"); break;
-		case 1: 
-			system("pause"); break;
-		case 2: 
-			system("pause"); break;
-		case 3: 
-			return; exit(0);
-		default:
-			break;
-		}
-	}
-	//return arr;
-}
+/*menu*/
+//void menu(std::vector<std::string> menu, bool mainM = false)
+//{
+//	while (true)
+//	{
+//		system("cls");
+//		int c = Menu::select_vertical(menu);
+//		switch (c)
+//		{
+//		case 0: 
+//			system("pause"); 
+//            break;
+//		case 1: 
+//			system("pause"); 
+//            break;
+//		case 2: 
+//            if (menu.size() == 3) { if (mainM) exit(0); else return; }
+//
+//			system("pause"); 
+//            break;
+//		case 3:
+//            if (menu.size() == 4) { if (mainM) exit(0); else return; }
+//
+//            system("pause"); 
+//            break;
+//        case 4:                        
+//            exit(0);
+//            break;
+//		default:
+//			break;
+//		}
+//	}
+//	return;
+//}
 
-static int callback(void* NotUsed, int argc, char** argv, char** azColName) {
-    int i;
-    for (i = 0; i < argc; i++) {
-        std::cout << azColName[i] << " : " << (argv[i] ? argv[i] : "NULL") << "\n";
-    }
-    std::cout << "\n";
-    return 0;
-}
+//static int callback(void* NotUsed, int argc, char** argv, char** azColName) 
+//{
+//    int i;
+//    for (i = 0; i < argc; i++) 
+//    {
+//        std::cout << std::boolalpha;
+//        std::cout << std::setw(15)<< azColName[i] << " : " << (argv[i] ? argv[i] : "NULL") << "\n";
+//    }
+//    std::cout << "\n";
+//    return 0;
+//}
+//
+//static int extractData(void* NotUsed, int argc, char** argv, char** azColName) 
+//{
+//    int i;
+//    for (i = 0; i < argc; i++) 
+//    {        
+//        UserLogin::id = std::stoi(argv[i]);     
+//    }
+//    
+//    return 0;
+//}
+//
+//int querySql(const std::string& query, int(*method)(void* NotUsed, int argc, char** argv, char** azColName) = 0)  /*bool flag = false,*/
+//{
+//    sqlite3* db;
+//    char* zErrMsg{};
+//    int rc{};
+//    //const char* sql;
+//    
+//    rc = sqlite3_open(dbName.c_str(), &db);
+//
+//    if (rc) 
+//    {
+//        std::cerr << "Can't open database" << sqlite3_errmsg(db);
+//        return 0;
+//    }
+//        
+//    //sql = query.c_str();
+//    
+//    rc = sqlite3_exec(db, query.c_str(), method, 0, &zErrMsg); //sqlite3_exec(db, sql, callback, 0, &zErrMsg)
+//    //rc = sqlite3_exec(db, query.c_str(), (flag ? callback : 0), 0, &zErrMsg); //sqlite3_exec(db, sql, callback, 0, &zErrMsg)
+//
+//    if (rc != SQLITE_OK)
+//    {
+//        std::cerr << "SQL error " << zErrMsg << "\n";
+//        sqlite3_free(zErrMsg);
+//    }
+//    
+//    sqlite3_close(db);
+//    return 0;
+//}
 
-int insertSql(const std::string& query) 
-{
-    sqlite3* db;
-    char* zErrMsg = 0;
-    int rc;
-    const char* sql;
-    
-    rc = sqlite3_open(dbName.c_str(), &db);
-
-    if (rc) 
-    {
-        std::cerr << "Can't open database" << sqlite3_errmsg(db);
-        return(0);
-    }
-        
-    sql = query.c_str();
-    
-    rc = sqlite3_exec(db, sql, 0, 0, &zErrMsg); //sqlite3_exec(db, sql, callback, 0, &zErrMsg)
-
-    if (rc != SQLITE_OK)
-    {
-        std::cerr << "SQL error " << zErrMsg << "\n";
-        sqlite3_free(zErrMsg);
-    }
-    
-    sqlite3_close(db);
-    return 0;
-}
-
-void selectSql(const std::string& query)
-{
-    sqlite3* db;
-    char* zErrMsg = 0;
-    int rc;
-    const char* sql;
-    //const char* data = "Callback function called";
-
-    rc = sqlite3_open(dbName.c_str(), &db);
-
-    if (rc) {
-        std::cerr << "Can't open database: " << sqlite3_errmsg(db);
-        return;
-    }
-    
-    sql = query.c_str();
-       
-    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg); //(db, sql, callback, (void*)data, &zErrMsg);
-
-    if (rc != SQLITE_OK) {
-        std::cerr << "SQL error: " << zErrMsg;
-        sqlite3_free(zErrMsg);
-    }
-    sqlite3_close(db);
-
-    return;
-}
+//void selectSql(const std::string& query)
+//{
+//    sqlite3* db;
+//    char* zErrMsg = 0;
+//    int rc;
+//    const char* sql;
+//    //const char* data = "Callback function called";
+//
+//    rc = sqlite3_open(dbName.c_str(), &db);
+//
+//    if (rc) {
+//        std::cerr << "Can't open database: " << sqlite3_errmsg(db);
+//        return;
+//    }
+//    
+//    sql = query.c_str();
+//       
+//    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg); //(db, sql, callback, (void*)data, &zErrMsg);
+//
+//    if (rc != SQLITE_OK) {
+//        std::cerr << "SQL error: " << zErrMsg;
+//        sqlite3_free(zErrMsg);
+//    }
+//    sqlite3_close(db);
+//    //return;
+//}
 
 
 int main()
 {
-	//menu();
-    std::string str{"123456"};
+    setlocale(LC_ALL, "ru");
+
+	menuMain(mainMenu);
+    //std::cout << "non exit\n";
+
+    /*std::string str{"123456"};
     std::string user{ "test005" };
     std::string pass{ md5(str) };
-    bool su{ false };
+    bool su{ false };*/
 
-    std::string insert = "INSERT INTO USERS(login,password,superuser) VALUES ('" 
-        + user + "', '" + pass + "', " + std::to_string(su) + "); ";
+    /*size_t inn{ 1234567881 };
+    std::string name{ "Petya"};
+    std::string surname{ "Vasiliev" };
+    std::string birthday{ "2000-02-01" };
+    std::string registerDate{ "2022-09-01" };
+    size_t phone{ 380671112234 };*/
 
-    std::string select = "SELECT * FROM USERS";
-       
-    insertSql(insert);
+    //UserLogin obj;
 
-    selectSql(select);
-   
+    /*std::string insert = "INSERT INTO USERS(login,password,superuser) VALUES ('" 
+        + user + "','" + pass +"','" + std::to_string(su) + "');";*/
+
+    /*std::string select = "SELECT MAX(id) FROM USERS";*/
+    
+   /* std::string select = "SELECT * FROM USERS JOIN USERDATA ON users_id = id";
+    
+    std::string select1 = "SELECT id FROM USERS WHERE login='" + user + "';";
+    querySql(select1, extractData);
+
+    std::string insert = "INSERT INTO USERDATA(users_id,inn,name,surname,birthday,registerDate,phone) VALUES ('"
+        + std::to_string(UserLogin::id) + "','" + std::to_string(inn) + "','" + name + "','" + surname + "','" 
+        + birthday +"','" + registerDate + "','" + std::to_string(phone) + "');";*/
+
+    
+    //querySql(insert);
+
+    //extractData - take data from sql
+    //callback - print from sql
+
         
+    //querySql(select, callback);
+    
 
+        
+    
 	return 0;
 }

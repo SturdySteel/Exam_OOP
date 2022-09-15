@@ -129,9 +129,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="20220830_Exam_OPP.cpp" />
-    <ClCompile Include="ArrayMenu.cpp" />
     <ClCompile Include="ManipulCursor.cpp" />
+    <ClCompile Include="sqlite3\shell.c" />
     <ClCompile Include="sqlite3\sqlite3.c" />
+    <ClCompile Include="SubMenu.cpp" />
+    <ClCompile Include="UserData.cpp" />
+    <ClCompile Include="UserLogin.cpp" />
     <ClCompile Include="UserTest.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +142,10 @@
     <ClInclude Include="ManipulCursor.h" />
     <ClInclude Include="MD5.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="queryDB.h" />
+    <ClInclude Include="SubMenu.h" />
+    <ClInclude Include="UserData.h" />
+    <ClInclude Include="UserLogin.h" />
     <ClInclude Include="UserTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

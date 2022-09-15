@@ -6,6 +6,12 @@ void setColor(int text, int background)
 	SetConsoleTextAttribute(hStdOut, (WORD)((background << 4) | text));
 }
 
+void setColor(ConsoleColor text, ConsoleColor background)
+{
+	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hStdOut, (WORD)((background << 4) | text));
+}
+
 void setPosition(int x, int y)
 {
 	HANDLE hConsole;

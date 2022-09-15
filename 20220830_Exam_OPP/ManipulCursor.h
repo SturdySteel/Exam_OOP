@@ -1,6 +1,5 @@
 #ifndef MANIPULCURSOR_H
 #define MANIPULCURSOR_H
-
 #include <windows.h>
 
 enum ConsoleColor
@@ -10,6 +9,7 @@ enum ConsoleColor
 };
 
 void setColor(int text, int background);
+void setColor(ConsoleColor text, ConsoleColor background);
 void setPosition(int x, int y);
 
 #endif // !MANIPULCURSOR_H
