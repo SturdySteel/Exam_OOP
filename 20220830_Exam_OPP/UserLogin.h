@@ -1,11 +1,10 @@
 #ifndef USERLOGIN_H
 #define USERLOGIN_H
 #include <string>
-#include "UserData.h"
-#include <string>
 #include <vector>
 #include <regex>
 #include <iterator>
+#include "UserData.h"
 #include "Menu.h"
 #include "MD5.h"
 #include "queryDB.h"
@@ -27,10 +26,8 @@ public:
 public:	
 	void menuMain(std::vector<std::string>& menu);	
 	bool autorization();
-	void registration();
-
-	//friend void selectSQL(const std::string& query, auto& obj);
-		
+	bool registration();
+			
 	std::string inputStr(std::string&& text, std::regex rgX, int y, bool sw = true);	
 
 	void setLogin(std::string login);
@@ -47,5 +44,4 @@ public:
 	void show();
 	~UserLogin();	
 };
-
 #endif // !USERLOGIN_H

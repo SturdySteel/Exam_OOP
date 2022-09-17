@@ -19,28 +19,28 @@ void UserLogin::menuMain(std::vector<std::string>& menu)
 				setColor(ConsoleColor::White);
 				Sleep(1500);
 				exit(0);			
-			}
-			//system("cls");
+			}			
 			std::cout << "\nПользователь '" << this->login << "' вошел в систему.\n\n";
-			system("pause");
-			return;
-			break;
+			Sleep(1500);
+			system("cls");			
+			return;			
 		case 1:
-			registration();
-			std::cout << "\nПользователь '" << this->login << "' зарегистрирован в системе.\n\n";
-			system("pause");
+			if (!registration())
+			{
+				std::cout << "\nПользователь не зарегистрирован в системе.\n\n";
+				Sleep(1500);
+			}
+			std::cout << "\nПользователь зарегистрирован в системе.\n\n";
+			Sleep(1500);			
 			break;
 		case 2:
-
-			if (this->id != 0)
-				return;
-			exit(0);
-			break;
+			/*if (this->id != 0)
+				return;*/
+			exit(0);			
 		default:
 			break;
 		}
-	}
-	//return;
+	}	
 }
 
 std::string UserLogin::inputStr(std::string&& text, std::regex rgX, int y, bool sw) //if false text printed Black
@@ -50,7 +50,7 @@ std::string UserLogin::inputStr(std::string&& text, std::regex rgX, int y, bool 
 	do {
 		//system("cls");
 		setPosition(0, y);
-		std::cout << "                                  ";
+		std::cout << "                                         ";
 		val = "";		
 		setPosition(0, y);
 		std::cout << text;
@@ -100,6 +100,7 @@ UserLogin::~UserLogin() { delete dataUL; }
 
 bool UserLogin::autorization()
 {
+	this->id = 0;
 	std::string login, pass, select;
 	std::regex rgX;
 	sqlite3_stmt* stmt{ nullptr };
@@ -142,35 +143,69 @@ bool UserLogin::autorization()
 	return 1;
 }
 
-void UserLogin::registration()
+bool UserLogin::registration()
 {
-	std::string login, pass, select;
+	std::string select, insert;
+	std::string login, pass;
 	std::string inn, name, surname, birthday, registerDate, phone;
+	bool superuser = false;
 	sqlite3_stmt* stmt{ nullptr };
-	std::regex rgX{ R"(\w{5,})" };	
-	
-	/*select = "SELECT MAX(id) FROM users;";
-	stmt = selectSQL(select);
-	this->id = sqlite3_column_int(stmt, 0) + 1;*/
-		
+	std::regex rgX{ R"(\w{5,})" };
 	do {
 		system("cls");
-		this->login = inputStr("Регистрация\nЛогин: ", rgX, 0);
+		login = inputStr("Регистрация\nЛогин: ", rgX, 0);
 		select = "SELECT * FROM users WHERE login='" + login + "';";
 		stmt = selectSQL(select);		
 		if (sqlite3_column_int(stmt, 0) == 0) 
 			break;
 		else 
-		{ std::cout << "Логин зарегистрирован"; Sleep(1500); }
+		{ 
+			std::cout << "Такой логин зарегистрирован"; Sleep(1500); 
+		}
+	} while (true);
+	pass = md5(inputStr("Пароль: ", rgX, 2, false));
+	insert = "INSERT INTO USERS(login, password, superuser) VALUES('" + login + "', '" 
+		+ pass + "', '" + std::to_string(superuser) + "'); ";
+	if (!querySQL(insert))
+		return 0;
+	int id = getIdByLogin(login);	
+
+	do {
+		rgX = R"(\d{10})";
+		inn = inputStr("ИНН (10 цифр): ", rgX, 3);
+		select = "SELECT * FROM userdata WHERE inn='" + inn + "';";
+		stmt = selectSQL(select);
+		if (sqlite3_column_int(stmt, 0) == 0) break;
+		else
+		{
+			std::cout << "Такой ИНН зарегистрирован"; Sleep(1500);
+		}
 	} while (true);
 
-	this->pass = md5(inputStr("Пароль: ", rgX, 2));
+	do {
+		rgX = R"(\d{10,12})";
+		phone = inputStr("Телефон (10-12 цифр): ", rgX, 4);
+		select = "SELECT * FROM userdata WHERE phone='" + phone + "';";
+		stmt = selectSQL(select);
+		if (sqlite3_column_int(stmt, 0) == 0) break;
+		else
+		{
+			std::cout << "Такой телефон зарегистрирован"; Sleep(1500);
+		}
+	} while (true);
 
-	rgX = R"(\d{10})";
-	inn = inputStr("ИНН (10 цифр): ", rgX, 3);
-
-	while (true)
-	{
-		break;
-	}
+	rgX = R"(\w+)";
+	name = inputStr("Имя: ", rgX, 5);
+	surname = inputStr("Фамилия: ", rgX, 6);
+	rgX = R"(\d{4}\-[01]{1}\d{1}\-[0-3]{1}\d{1})";
+	birthday = inputStr("Дата рождения (ГГГГ-ММ-ДД): ", rgX, 7);
+	registerDate = inputStr("Дата регистрации (ГГГГ-ММ-ДД): ", rgX, 8);
+	
+	insert = "INSERT INTO USERDATA(users_id,inn,name,surname,birthday,registerDate,phone) VALUES ('"
+		+ std::to_string(id) + "','" + inn + "','" + name + "','" + surname + "','"
+		+ birthday + "','" + registerDate + "','" + phone + "');";
+	if (!querySQL(insert))
+		return 0;
+	
+	return 1;
 }

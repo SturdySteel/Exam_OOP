@@ -33,10 +33,10 @@
     <ClCompile Include="UserLogin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SubMenu.cpp">
+    <ClCompile Include="sqlite3\shell.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sqlite3\shell.c">
+    <ClCompile Include="AdminExten.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,10 +62,10 @@
     <ClInclude Include="UserLogin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SubMenu.h">
+    <ClInclude Include="queryDB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="queryDB.h">
+    <ClInclude Include="AdminExten.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
