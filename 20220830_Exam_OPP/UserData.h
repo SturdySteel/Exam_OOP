@@ -8,33 +8,33 @@ class UserData
 {
 private:
 	int users_id{};
-	size_t inn{};
+	std::string inn{};
 	std::string name{};
 	std::string surname{};
 	std::string birthday{};
 	std::string registerDate{};
-	size_t phone{};
+	std::string phone{};
 
 public:
 	UserData() {}
-	UserData(int users_id, size_t inn, std::string name, std::string surname,
-		std::string birthday, std::string registerDate, size_t phone); 	
+	UserData(int users_id, std::string inn, std::string name, std::string surname,
+		std::string birthday, std::string registerDate, std::string phone);
 
 	void setUsersId(int users_id);
-	void setINN(size_t inn);
+	void setINN(std::string inn);
 	void setName(std::string name);
 	void setSurname(std::string surname);
 	void setBirthday(std::string birthday);
 	void setRegdate(std::string registerDate);
-	void setPhone(size_t phone);
+	void setPhone(std::string phone);
 
 	int getUsersId();
-	size_t getINN();
+	std::string getINN();
 	std::string getName();
 	std::string getSurname();
 	std::string getBirthday();
 	std::string getRegdate();
-	size_t getPhone();
+	std::string getPhone();
 
 	void show();
 };

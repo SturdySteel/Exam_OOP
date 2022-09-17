@@ -38,6 +38,7 @@ static int querySQL(const std::string& query, int(*method)(void*, int, char**, c
     if (rc != SQLITE_OK)
     {
         std::cerr << "SQL error " << zErrMsg << "\n";
+        std::cout << "rc = " << rc << "\n";
         sqlite3_free(zErrMsg);
     }
 
@@ -45,7 +46,9 @@ static int querySQL(const std::string& query, int(*method)(void*, int, char**, c
     return 0;
 }
 
-static void extractSQL(const std::string& query, auto& obj)
+//SELECT* FROM USERS JOIN USERDATA ON users_id = id
+
+static sqlite3_stmt* selectSQL(const std::string& query)
 {
     sqlite3* db;
     sqlite3_stmt* stmt;
@@ -55,48 +58,35 @@ static void extractSQL(const std::string& query, auto& obj)
     if (rc)
     {
         std::cerr << "Can't open database" << sqlite3_errmsg(db);
-        return;
+        return nullptr;
     }
 
     sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, 0);
-    sqlite3_step(stmt);
-    if (sqlite3_column_int(stmt, 0) == 0)
-    {
-        sqlite3_close(db);
-        return;
-    }
-
-    obj.setDataUL(sqlite3_column_int(stmt, 0), 
-        sqlite3_column_int64(stmt, 1),
-        reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2)),
-        reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3)),
-        reinterpret_cast<const char*>(sqlite3_column_text(stmt, 4)),
-        reinterpret_cast<const char*>(sqlite3_column_text(stmt, 5)),
-        sqlite3_column_int64(stmt, 6));
-       
-    sqlite3_close(db);
+    sqlite3_step(stmt);    
+    sqlite3_close(db);      
+    return stmt;
 }
 
-static void selectSQL(const std::string& query, auto& obj)
-{
-    sqlite3* db;
-    sqlite3_stmt* stmt;
-    char* zErrMsg{};
-    int rc = sqlite3_open(dbName.c_str(), &db);
-
-    if (rc)
-    {
-        std::cerr << "Can't open database" << sqlite3_errmsg(db);
-        return;
-    }
-    sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, 0);
-    sqlite3_step(stmt);
-    obj.id = sqlite3_column_int(stmt, 0);
-    if (obj.id == 0)
-        return;
-    //std::cout << sqlite3_column_text(stmt, 2) << "\n";
-    obj.setSU(sqlite3_column_int(stmt, 3));
-    sqlite3_close(db);
-}
+//static void selectSQL(const std::string& query, auto& obj)
+//{
+//    sqlite3* db;
+//    sqlite3_stmt* stmt;
+//    char* zErrMsg{};
+//    int rc = sqlite3_open(dbName.c_str(), &db);
+//
+//    if (rc)
+//    {
+//        std::cerr << "Can't open database" << sqlite3_errmsg(db);
+//        return;
+//    }
+//    sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, 0);
+//    sqlite3_step(stmt);
+//    obj.id = sqlite3_column_int(stmt, 0);
+//    if (obj.id == 0)
+//        return;
+//    //std::cout << sqlite3_column_text(stmt, 2) << "\n";
+//    obj.setSU(sqlite3_column_int(stmt, 3));
+//    sqlite3_close(db);
+//}
 
 #endif // !QUERYDB_H

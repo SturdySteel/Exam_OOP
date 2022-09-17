@@ -12,7 +12,7 @@
 #include "UserData.h"
 #include "UserTest.h"
 #include "UserLogin.h"
-//#include "queryDB.h"
+#include "queryDB.h"
 //#include "Menu.h"
 
 //std::string dbName{ "db/testsystem.db" };
@@ -140,17 +140,13 @@ int main()
     UserLogin user;
 
 	user.menuMain(mainMenu);
-
-    std::cout << std::setw(15) << "id = " << user.id << "\n";
-    std::cout << std::setw(15) << "log = " << user.getLogin() << "\n";
-    std::cout << std::setw(15) << "pass/hash = " << user.getPass() << "\n";
-    std::cout << std::setw(15) << "su = " << user.getSU() << "\n";
-    user.getDataUL().show();
+      
+    user.show();
 
 
 
     /*std::string str{"123456"};
-    std::string user{ "test005" };
+    std::string login{ "test002" };
     std::string pass{ md5(str) };
     bool su{ false };*/
 
@@ -163,8 +159,8 @@ int main()
 
     //UserLogin obj;
 
-    /*std::string insert = "INSERT INTO USERS(login,password,superuser) VALUES ('" 
-        + user + "','" + pass +"','" + std::to_string(su) + "');";*/
+    /*std::string insert = "INSERT INTO USERS(login,password,superuser) VALUES ('" + login + "','" + pass +"','" + std::to_string(su) + "');";
+    querySQL(insert);*/
 
     /*std::string select = "SELECT MAX(id) FROM USERS";*/
     
@@ -177,17 +173,7 @@ int main()
         + std::to_string(UserLogin::id) + "','" + std::to_string(inn) + "','" + name + "','" + surname + "','" 
         + birthday +"','" + registerDate + "','" + std::to_string(phone) + "');";*/
 
-    
-    //querySql(insert);
-
-    //extractData - take data from sql
-    //callback - print from sql
-
-        
-    //querySql(select, callback);
-    
-
-        
+           
     
 	return 0;
 }

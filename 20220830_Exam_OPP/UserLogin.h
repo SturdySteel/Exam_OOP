@@ -27,22 +27,24 @@ public:
 public:	
 	void menuMain(std::vector<std::string>& menu);	
 	bool autorization();
-	
-	friend void selectSQL(const std::string& query, auto& obj);
+	void registration();
+
+	//friend void selectSQL(const std::string& query, auto& obj);
 		
-	static std::string input(std::string text, bool sw = true);
+	std::string inputStr(std::string&& text, std::regex rgX, int y, bool sw = true);	
 
 	void setLogin(std::string login);
 	void setPass(std::string pass);
 	void setSU(bool su);
-	void setDataUL(int users_id, size_t inn, std::string name, std::string surname,
-		std::string birthday, std::string registerDate, size_t phone);
+	void setDataUL(int users_id, std::string inn, std::string name, std::string surname,
+		std::string birthday, std::string registerDate, std::string phone);
 
 	UserData& getDataUL();
 	std::string getLogin();
 	std::string getPass();
 	bool getSU();
 	
+	void show();
 	~UserLogin();	
 };
 
