@@ -57,7 +57,7 @@
 int main()
 {
     setlocale(LC_ALL, "ru");
-       
+   
     UserLogin user;
     AdminExten adm;
 

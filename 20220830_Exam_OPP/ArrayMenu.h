@@ -1,7 +1,7 @@
 #ifndef ARRAYMENU_H
 #define ARRAYMENU_H
-#include <string>
-#include <vector>
+//#include <string>
+//#include <vector>
 
 std::vector<std::string> mainMenu 
 {	
@@ -17,7 +17,7 @@ std::vector<std::string> adminMenu
 	"Возврат"
 };
 
-std::vector<std::string> admUsersMenu
+std::vector<std::string> admUsersMenu // admTestMenu
 {
 	"Просмотр",
 	"Редактировать",
@@ -25,13 +25,13 @@ std::vector<std::string> admUsersMenu
 	"Возврат"
 };
 
-std::vector<std::string> admTestsMenu
-{
-	"Просмотр",
-	"Редактировать",
-	"Добавить"
-	"Возврат"
-};
+//std::vector<std::string> admTestsMenu
+//{
+//	"Просмотр",
+//	"Редактировать",
+//	"Добавить"
+//	"Возврат"
+//};
 
 
 std::vector<std::string> userMenu

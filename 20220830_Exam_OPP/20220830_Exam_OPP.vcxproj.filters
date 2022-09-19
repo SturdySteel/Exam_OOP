@@ -39,6 +39,9 @@
     <ClCompile Include="AdminExten.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="queryDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ManipulCursor.h">
