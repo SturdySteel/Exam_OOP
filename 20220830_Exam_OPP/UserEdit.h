@@ -15,13 +15,14 @@
 class UserEdit
 {
 private:
-	//static UserEdit* instance;
-	//UserEdit() {}
+	static UserEdit* instance;
+	UserEdit() {}
 
 public:
-	//static UserEdit* getInstance();
-	static bool create();
-	//bool edit(UserLogin& obj);	
+	static UserEdit* getInstance();
+	bool create();
+	std::string inputStr(std::string&& text, std::regex rgX, int y, bool sw = true);
+	bool edit(auto& obj);	
 };
 
 #endif // !USEREDIT_H

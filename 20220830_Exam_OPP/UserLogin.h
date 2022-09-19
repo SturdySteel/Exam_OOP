@@ -32,7 +32,7 @@ public:
 	bool autorization();
 	bool registration();
 			
-	static std::string inputStr(std::string&& text, std::regex rgX, int y, bool sw = true);	
+	//static std::string inputStr(std::string&& text, std::regex rgX, int y, bool sw = true);	
 
 	void setLogin(std::string login);
 	void setPass(std::string pass);

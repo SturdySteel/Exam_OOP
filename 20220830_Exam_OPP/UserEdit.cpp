@@ -1,13 +1,13 @@
 #include "UserEdit.h"
 
-//UserEdit* instance = nullptr;
-//
-//UserEdit* UserEdit::getInstance()
-//{
-//	if (instance == nullptr)
-//		instance = new UserEdit();
-//	return nullptr;
-//}
+UserEdit* UserEdit::instance = nullptr;
+
+UserEdit* UserEdit::getInstance()
+{
+	if (instance == nullptr)
+		instance = new UserEdit();
+	return nullptr;
+}
 
 bool UserEdit::create()
 {
@@ -21,7 +21,7 @@ bool UserEdit::create()
 	std::regex rgX{ R"(\w{5,})" };
 	do {
 		system("cls");
-		login = UserLogin::inputStr("Регистрация\nЛогин: ", rgX, 0);
+		login = inputStr("Регистрация\nЛогин: ", rgX, 0);
 		select = "SELECT * FROM users WHERE login='" + login + "';";
 		stmt = db->selectSQL(select);
 		if (sqlite3_column_int(stmt, 0) == 0)
@@ -31,7 +31,7 @@ bool UserEdit::create()
 			std::cout << "Такой логин зарегистрирован"; Sleep(1500);
 		}
 	} while (true);
-	pass = md5(UserLogin::inputStr("Пароль: ", rgX, 2, false));
+	pass = md5(inputStr("Пароль: ", rgX, 2, false));
 	insert = "INSERT INTO USERS(login, password, superuser) VALUES('" + login + "', '"
 		+ pass + "', '" + std::to_string(superuser) + "'); ";
 	if (!db->querySQL(insert))
@@ -40,7 +40,7 @@ bool UserEdit::create()
 
 	do {
 		rgX = R"(\d{10})";
-		inn = UserLogin::inputStr("ИНН (10 цифр): ", rgX, 3);
+		inn = inputStr("ИНН (10 цифр): ", rgX, 3);
 		select = "SELECT * FROM userdata WHERE inn='" + inn + "';";
 		stmt = db->selectSQL(select);
 		if (sqlite3_column_int(stmt, 0) == 0) break;
@@ -52,7 +52,7 @@ bool UserEdit::create()
 
 	do {
 		rgX = R"(\d{10,12})";
-		phone = UserLogin::inputStr("Телефон (10-12 цифр): ", rgX, 4);
+		phone = inputStr("Телефон (10-12 цифр): ", rgX, 4);
 		select = "SELECT * FROM userdata WHERE phone='" + phone + "';";
 		stmt = db->selectSQL(select);
 		if (sqlite3_column_int(stmt, 0) == 0) break;
@@ -63,11 +63,11 @@ bool UserEdit::create()
 	} while (true);
 
 	rgX = R"(\w+)";
-	name = UserLogin::inputStr("Имя: ", rgX, 5);
-	surname = UserLogin::inputStr("Фамилия: ", rgX, 6);
+	name = inputStr("Имя: ", rgX, 5);
+	surname = inputStr("Фамилия: ", rgX, 6);
 	rgX = R"(\d{4}\-[01]{1}\d{1}\-[0-3]{1}\d{1})";
-	birthday = UserLogin::inputStr("Дата рождения (ГГГГ-ММ-ДД): ", rgX, 7);
-	registerDate = UserLogin::inputStr("Дата регистрации (ГГГГ-ММ-ДД): ", rgX, 8);
+	birthday = inputStr("Дата рождения (ГГГГ-ММ-ДД): ", rgX, 7);
+	registerDate = inputStr("Дата регистрации (ГГГГ-ММ-ДД): ", rgX, 8);
 
 	insert = "INSERT INTO USERDATA(users_id,inn,name,surname,birthday,registerDate,phone) VALUES ('"
 		+ std::to_string(id) + "','" + inn + "','" + name + "','" + surname + "','"
@@ -79,7 +79,24 @@ bool UserEdit::create()
 
 }
 
-//bool UserEdit::edit(UserLogin& obj)
+std::string UserEdit::inputStr(std::string&& text, std::regex rgX, int y, bool sw) //if false text printed Black
+{
+	std::string val;
+	do {
+		setPosition(0, y);
+		std::cout << "                                         ";
+		val = "";
+		setPosition(0, y);
+		std::cout << text;
+		setColor(sw ? ConsoleColor::White : ConsoleColor::Black);
+		getline(std::cin, val);
+		setColor(ConsoleColor::White);
+		//std::cin.ignore(32768, '\n');			
+	} while (!(std::regex_match(val.data(), rgX)));
+	return val;
+}
+
+//bool UserEdit::edit(auto& obj)
 //{
 //    return false;
 //}

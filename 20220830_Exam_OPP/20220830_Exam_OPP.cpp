@@ -59,24 +59,24 @@ int main()
 {
     setlocale(LC_ALL, "ru");   
     
-    UserLogin user;
+    UserLogin usr;
     AdminExten adm{ admMenuArr };
     //UserExten usr{ userMenuArr };
 
     while (true)
     {       
-        user.menuMain(mainMenu);
+        usr.menuMain(mainMenu);
         //user.show();
 
-        switch (user.getSU())
+        switch (usr.getSU())
         {
         case true:
             
             adm.menu();
-            std::cout << user.getLogin() << "\n";
+            std::cout << usr.getLogin() << "\n";
             break;
         case false:
-            std::cout << user.getLogin() << "\n";
+            std::cout << usr.getLogin() << "\n";
             break;        
         }
     }

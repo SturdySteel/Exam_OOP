@@ -62,25 +62,6 @@ void UserLogin::menuMain(std::vector<std::string>& menu)
 	}	
 }
 
-std::string UserLogin::inputStr(std::string&& text, std::regex rgX, int y, bool sw) //if false text printed Black
-{
-	//std::regex rgX{R"(\w{3,})"};
-	std::string val;
-	do {
-		//system("cls");
-		setPosition(0, y);
-		std::cout << "                                         ";
-		val = "";		
-		setPosition(0, y);
-		std::cout << text;
-		setColor(sw ? ConsoleColor::White : ConsoleColor::Black);
-		getline(std::cin, val);
-		setColor(ConsoleColor::White);
-		//std::cin.ignore(32768, '\n');			
-	} while (!(std::regex_match(val.data(), rgX)));	
-	return val;
-}
-
 void UserLogin::setLogin(std::string login) { this->login = login; }
 
 void UserLogin::setPass(std::string pass) { this->pass = pass; }
@@ -119,6 +100,7 @@ UserLogin::~UserLogin() { if(dataUL != nullptr) delete dataUL; }
 
 bool UserLogin::autorization()
 {
+	UserEdit* usEd = UserEdit::getInstance();
 	QueryDB* db = QueryDB::getInstance();
 	this->id = 0;
 	std::string login, pass, select;
@@ -130,8 +112,8 @@ bool UserLogin::autorization()
 		if (i++ >= 3) return 0;
 		system("cls");
 		rgX = R"(\w{5,})";
-		login = inputStr("Авторизация\nЛогин: ", rgX, 0);
-		pass = md5(inputStr("Пароль: ", rgX, 2, false));				
+		login = usEd->inputStr("Авторизация\nЛогин: ", rgX, 0);
+		pass = md5(usEd->inputStr("Пароль: ", rgX, 2, false));				
 		select = "SELECT * FROM users WHERE login='" + login + "' AND password ='" + pass + "';";				
 		stmt = db->selectSQL(select);
 		this->id = sqlite3_column_int(stmt, 0);
@@ -165,6 +147,6 @@ bool UserLogin::autorization()
 
 bool UserLogin::registration()
 {	
-	//UserEdit* usEd = UserEdit::getInstance();
-	return UserEdit::create();
+	UserEdit* usEd = UserEdit::getInstance();
+	return usEd->create();
 }
