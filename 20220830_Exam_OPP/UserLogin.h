@@ -9,6 +9,7 @@
 #include "MD5.h"
 #include "queryDB.h"
 #include "ManipulCursor.h"
+#include "UserEdit.h"
 
 //typedef std::basic_string <unsigned char> ustring;
 
@@ -23,12 +24,15 @@ private:
 public:
 	static int id;
 
-public:	
+public:
+	UserLogin() {}
+	UserLogin(UserLogin& obj);
+	UserLogin& operator=(UserLogin& obj);
 	void menuMain(std::vector<std::string>& menu);	
 	bool autorization();
 	bool registration();
 			
-	std::string inputStr(std::string&& text, std::regex rgX, int y, bool sw = true);	
+	static std::string inputStr(std::string&& text, std::regex rgX, int y, bool sw = true);	
 
 	void setLogin(std::string login);
 	void setPass(std::string pass);

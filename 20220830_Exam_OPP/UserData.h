@@ -20,7 +20,7 @@ public:
 	UserData(int users_id, std::string inn, std::string name, std::string surname,
 		std::string birthday, std::string registerDate, std::string phone);
 
-	void setUsersId(int users_id);
+	//void setUsersId(int users_id);
 	void setINN(std::string inn);
 	void setName(std::string name);
 	void setSurname(std::string surname);

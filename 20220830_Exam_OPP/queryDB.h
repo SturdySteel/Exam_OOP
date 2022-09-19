@@ -5,8 +5,8 @@
 #include "sqlite3/sqlite3.h"
 #include <string>
 #include <cstring>
-#include "UserLogin.h"
-#include "UserData.h"
+//#include "UserLogin.h"
+//#include "UserData.h"
 
 
 class QueryDB
@@ -22,6 +22,9 @@ public:
     int querySQL(const std::string& query, int(*method)(void*, int, char**, char**) = 0);
     sqlite3_stmt* selectSQL(const std::string& query);
     int getIdByLogin(std::string login);
+
+    bool updateData(std::string tabName, std::string colName, 
+        std::string sel, int id, auto& val);
     
 };
 //"INSERT INTO USERS(login,password,superuser) VALUES ('" + login 

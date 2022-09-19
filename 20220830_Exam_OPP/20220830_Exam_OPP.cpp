@@ -7,7 +7,8 @@
 #include <vector>
 #include "ArrayMenu.h"
 #include "UserLogin.h"
-#include "AdminExten.h"
+#include "UserExten.h"
+#include "UserEdit.h"
 //#include "UserData.h"
 //#include "sqlite3/sqlite3.h"
 //#include "MD5.h"
@@ -56,10 +57,11 @@
 
 int main()
 {
-    setlocale(LC_ALL, "ru");
-   
+    setlocale(LC_ALL, "ru");   
+    
     UserLogin user;
-    AdminExten adm;
+    AdminExten adm{ admMenuArr };
+    //UserExten usr{ userMenuArr };
 
     while (true)
     {       
@@ -70,14 +72,12 @@ int main()
         {
         case true:
             
-            adm.admMenu(adminMenu);
+            adm.menu();
             std::cout << user.getLogin() << "\n";
             break;
         case false:
             std::cout << user.getLogin() << "\n";
-            break;
-        default:
-            break;
+            break;        
         }
     }
 

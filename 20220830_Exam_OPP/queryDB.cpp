@@ -38,7 +38,7 @@ int QueryDB::querySQL(const std::string& query, int(*method)(void*, int, char**,
         std::cerr << "SQL error " << zErrMsg << "\n";
         std::cout << "rc = " << rc << "\n";
         sqlite3_free(zErrMsg);
-        return 0;
+        return rc;
     }
     sqlite3_close(db);
     return 1;
@@ -65,4 +65,14 @@ int QueryDB::getIdByLogin(std::string login)
     std::string query = "SELECT id FROM users WHERE login ='" + login + "';";
     stmt = selectSQL(query);
     return sqlite3_column_int(stmt, 0);
+}
+
+bool QueryDB::updateData(std::string tabName, std::string colName, std::string sel, int id, auto& val)
+{
+    std::string query = "UPDATE " + tabName + " SET " + colName +
+        "='" + val + "' WHERE " + sel + "='" + id + "';";
+    int rc = querySQL(query);
+    if (rc != 1)
+        return false;
+    return true;
 }

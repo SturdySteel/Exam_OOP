@@ -6,7 +6,7 @@ UserData::UserData(int users_id, std::string inn, std::string name, std::string 
 	birthday{ birthday }, registerDate{ registerDate }, phone{ phone }
 {}
 
-void UserData::setUsersId(int users_id) { this->users_id = users_id; }
+//void UserData::setUsersId(int users_id) { this->users_id = users_id; }
 
 void UserData::setINN(std::string inn) { this->inn = inn; }
 
@@ -19,6 +19,7 @@ void UserData::setBirthday(std::string birthday) { this->birthday = birthday; }
 void UserData::setRegdate(std::string registerDate) { this->registerDate = registerDate; }
 
 void UserData::setPhone(std::string phone) { this->phone = phone; }
+
 
 int UserData::getUsersId() { return this->users_id; }
 

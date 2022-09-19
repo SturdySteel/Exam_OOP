@@ -36,10 +36,13 @@
     <ClCompile Include="sqlite3\shell.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AdminExten.cpp">
+    <ClCompile Include="queryDB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="queryDB.cpp">
+    <ClCompile Include="UserExten.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEdit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,7 +71,10 @@
     <ClInclude Include="queryDB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AdminExten.h">
+    <ClInclude Include="UserExten.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEdit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

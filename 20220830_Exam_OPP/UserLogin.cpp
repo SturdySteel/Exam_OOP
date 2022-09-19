@@ -2,6 +2,25 @@
 
 int UserLogin::id{ 0 };
 
+UserLogin::UserLogin(UserLogin& obj)
+{
+	this->operator=(obj);
+}
+
+UserLogin& UserLogin::operator=(UserLogin& obj)
+{
+	this->id = obj.id;
+	this->login = obj.login;
+	this->pass = "";
+	this->superuser = obj.superuser;
+	if (dataUL != nullptr) delete dataUL;
+	auto ptr = obj.getDataUL();
+	this->dataUL = new UserData{ ptr.getUsersId(), ptr.getINN(), ptr.getName(),
+		ptr.getSurname(), ptr.getBirthday(), ptr.getRegdate(), ptr.getPhone() };
+	
+	return *this;
+}
+
 void UserLogin::menuMain(std::vector<std::string>& menu)
 {
 	while (true)
@@ -96,7 +115,7 @@ void UserLogin::show()
 		dataUL->show();
 }
 
-UserLogin::~UserLogin() { delete dataUL; }
+UserLogin::~UserLogin() { if(dataUL != nullptr) delete dataUL; }
 
 bool UserLogin::autorization()
 {
@@ -145,70 +164,7 @@ bool UserLogin::autorization()
 }
 
 bool UserLogin::registration()
-{
-	QueryDB* db = QueryDB::getInstance();
-	std::string select, insert;
-	std::string login, pass;
-	std::string inn, name, surname, birthday, registerDate, phone;
-	bool superuser = false;
-	sqlite3_stmt* stmt{ nullptr };
-	
-	std::regex rgX{ R"(\w{5,})" };
-	do {
-		system("cls");
-		login = inputStr("Регистрация\nЛогин: ", rgX, 0);
-		select = "SELECT * FROM users WHERE login='" + login + "';";
-		stmt = db->selectSQL(select);		
-		if (sqlite3_column_int(stmt, 0) == 0) 
-			break;
-		else 
-		{ 
-			std::cout << "Такой логин зарегистрирован"; Sleep(1500); 
-		}
-	} while (true);
-	pass = md5(inputStr("Пароль: ", rgX, 2, false));
-	insert = "INSERT INTO USERS(login, password, superuser) VALUES('" + login + "', '" 
-		+ pass + "', '" + std::to_string(superuser) + "'); ";
-	if (!db->querySQL(insert))
-		return 0;
-	int id = db->getIdByLogin(login);	
-
-	do {
-		rgX = R"(\d{10})";
-		inn = inputStr("ИНН (10 цифр): ", rgX, 3);
-		select = "SELECT * FROM userdata WHERE inn='" + inn + "';";
-		stmt = db->selectSQL(select);
-		if (sqlite3_column_int(stmt, 0) == 0) break;
-		else
-		{
-			std::cout << "Такой ИНН зарегистрирован"; Sleep(1500);
-		}
-	} while (true);
-
-	do {
-		rgX = R"(\d{10,12})";
-		phone = inputStr("Телефон (10-12 цифр): ", rgX, 4);
-		select = "SELECT * FROM userdata WHERE phone='" + phone + "';";
-		stmt = db->selectSQL(select);
-		if (sqlite3_column_int(stmt, 0) == 0) break;
-		else
-		{
-			std::cout << "Такой телефон зарегистрирован"; Sleep(1500);
-		}
-	} while (true);
-
-	rgX = R"(\w+)";
-	name = inputStr("Имя: ", rgX, 5);
-	surname = inputStr("Фамилия: ", rgX, 6);
-	rgX = R"(\d{4}\-[01]{1}\d{1}\-[0-3]{1}\d{1})";
-	birthday = inputStr("Дата рождения (ГГГГ-ММ-ДД): ", rgX, 7);
-	registerDate = inputStr("Дата регистрации (ГГГГ-ММ-ДД): ", rgX, 8);
-	
-	insert = "INSERT INTO USERDATA(users_id,inn,name,surname,birthday,registerDate,phone) VALUES ('"
-		+ std::to_string(id) + "','" + inn + "','" + name + "','" + surname + "','"
-		+ birthday + "','" + registerDate + "','" + phone + "');";
-	if (!db->querySQL(insert))
-		return 0;
-	
-	return 1;
+{	
+	//UserEdit* usEd = UserEdit::getInstance();
+	return UserEdit::create();
 }

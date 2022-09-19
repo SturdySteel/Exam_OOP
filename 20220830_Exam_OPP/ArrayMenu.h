@@ -17,7 +17,7 @@ std::vector<std::string> adminMenu
 	"Возврат"
 };
 
-std::vector<std::string> admUsersMenu // admTestMenu
+std::vector<std::string> admUsersMenu 
 {
 	"Просмотр",
 	"Редактировать",
@@ -25,13 +25,13 @@ std::vector<std::string> admUsersMenu // admTestMenu
 	"Возврат"
 };
 
-//std::vector<std::string> admTestsMenu
-//{
-//	"Просмотр",
-//	"Редактировать",
-//	"Добавить"
-//	"Возврат"
-//};
+std::vector<std::string> admTestsMenu
+{
+	"Просмотр",
+	"Редактировать",
+	"Добавить"
+	"Возврат"
+};
 
 
 std::vector<std::string> userMenu
@@ -39,6 +39,18 @@ std::vector<std::string> userMenu
 	"Просмотр теста",
 	"Выбрать тест",
 	"Возврат"
+};
+
+std::vector<std::vector<std::string>> admMenuArr
+{
+	adminMenu,
+	admUsersMenu,
+	admTestsMenu
+};
+
+std::vector<std::vector<std::string>> userMenuArr
+{
+	userMenu
 };
 
 //std::vector<std::string> userTestsMenu
