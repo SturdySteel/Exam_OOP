@@ -54,13 +54,13 @@ void UserExten::testsMenu()
 		switch (c)
 		{
 		case 0:
-
+			//listTest()
 			break;
 		case 1:
 
 			break;
 		case 2:
-
+			//addTest();
 			break;
 		case 3:
 			return;

@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="20220830_Exam_OPP.cpp" />
+    <ClCompile Include="GroupsTests.cpp" />
     <ClCompile Include="ManipulCursor.cpp" />
     <ClCompile Include="queryDB.cpp" />
     <ClCompile Include="sqlite3\shell.c" />
@@ -141,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArrayMenu.h" />
+    <ClInclude Include="GroupsTests.h" />
     <ClInclude Include="ManipulCursor.h" />
     <ClInclude Include="MD5.h" />
     <ClInclude Include="Menu.h" />

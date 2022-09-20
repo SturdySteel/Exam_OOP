@@ -9,6 +9,7 @@
 #include "UserLogin.h"
 #include "UserExten.h"
 #include "UserEdit.h"
+#include "GroupsTests.h"
 //#include "UserData.h"
 //#include "sqlite3/sqlite3.h"
 //#include "MD5.h"
@@ -62,6 +63,8 @@ int main()
     UserLogin usr;
     AdminExten adm{ admMenuArr };
     //UserExten usr{ userMenuArr };
+    TestLine a;
+    std::vector<TestLine> aa;
 
     while (true)
     {       

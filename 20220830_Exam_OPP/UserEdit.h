@@ -20,7 +20,7 @@ private:
 
 public:
 	static UserEdit* getInstance();
-	bool create();
+	bool create();	
 	std::string inputStr(std::string&& text, std::regex rgX, int y, bool sw = true);
 	bool edit(auto& obj);	
 };

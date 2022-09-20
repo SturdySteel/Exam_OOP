@@ -1,6 +1,5 @@
 .vs/
 x64/
 Debug/
-*.db-shm
 *.db-wal
 

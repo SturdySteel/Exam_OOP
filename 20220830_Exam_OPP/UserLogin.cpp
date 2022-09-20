@@ -119,7 +119,7 @@ bool UserLogin::autorization()
 		this->id = sqlite3_column_int(stmt, 0);
 		if (this->id == 0 || stmt == nullptr)
 		{			
-			std::cout << "\nПользователь '" << login << "' не найден...\n";
+			std::cout << "\nПользователь/пароль не верен...\n";
 			Sleep(1500);
 		}		
 	}

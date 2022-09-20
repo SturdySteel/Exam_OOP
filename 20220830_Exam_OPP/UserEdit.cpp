@@ -96,9 +96,10 @@ std::string UserEdit::inputStr(std::string&& text, std::regex rgX, int y, bool s
 	return val;
 }
 
-//bool UserEdit::edit(auto& obj)
-//{
-//    return false;
-//}
+
+bool UserEdit::edit(auto& obj)
+{
+    return false;
+}
 //
 //UserEdit::~UserEdit() {	if (uM != nullptr) delete uM; }
