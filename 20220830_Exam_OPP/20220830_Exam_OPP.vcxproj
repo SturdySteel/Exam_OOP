@@ -130,10 +130,15 @@
   <ItemGroup>
     <ClCompile Include="20220830_Exam_OPP.cpp" />
     <ClCompile Include="GroupsTests.cpp" />
+    <ClCompile Include="GroupTest.cpp" />
+    <ClCompile Include="ITests.cpp" />
     <ClCompile Include="ManipulCursor.cpp" />
     <ClCompile Include="queryDB.cpp" />
     <ClCompile Include="sqlite3\shell.c" />
     <ClCompile Include="sqlite3\sqlite3.c" />
+    <ClCompile Include="SubGroupTest.cpp" />
+    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="TestLine.cpp" />
     <ClCompile Include="UserData.cpp" />
     <ClCompile Include="UserEdit.cpp" />
     <ClCompile Include="UserExten.cpp" />
@@ -143,10 +148,15 @@
   <ItemGroup>
     <ClInclude Include="ArrayMenu.h" />
     <ClInclude Include="GroupsTests.h" />
+    <ClInclude Include="GroupTest.h" />
+    <ClInclude Include="ITests.h" />
     <ClInclude Include="ManipulCursor.h" />
     <ClInclude Include="MD5.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="queryDB.h" />
+    <ClInclude Include="SubGroupTest.h" />
+    <ClInclude Include="Test.h" />
+    <ClInclude Include="TestLine.h" />
     <ClInclude Include="UserData.h" />
     <ClInclude Include="UserEdit.h" />
     <ClInclude Include="UserExten.h" />

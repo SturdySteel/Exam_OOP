@@ -45,10 +45,8 @@ void UserExten::usersMenu()
 	}
 }
 
-void UserExten::testsMenu()
-{
-	while (true)
-	{
+void UserExten::testsMenu() {
+	while (true) 	{
 		system("cls");
 		int c = Menu::select_vertical(menuArr[2], HorizontalAlignment::Left, 0);
 		switch (c)

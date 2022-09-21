@@ -35,8 +35,7 @@ std::string UserData::getRegdate() { return this->registerDate; }
 
 std::string UserData::getPhone() { return this->phone;}
 
-void UserData::show()
-{
+void UserData::show() {
 	if (this->users_id == 0)
 		return;
 	std::cout << std::setw(15) << "inn = " << this->inn << "\n"

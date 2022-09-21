@@ -63,16 +63,16 @@ int main()
     UserLogin usr;
     AdminExten adm{ admMenuArr };
     //UserExten usr{ userMenuArr };
-    TestLine a;
-    std::vector<TestLine> aa;
+   
+    /*GroupsTests* tests{};
+    tests->setGrTest();*/
 
-    while (true)
-    {       
+
+    while (true) {       
         usr.menuMain(mainMenu);
         //user.show();
 
-        switch (usr.getSU())
-        {
+        switch (usr.getSU()) {
         case true:
             
             adm.menu();

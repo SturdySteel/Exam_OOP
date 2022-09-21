@@ -2,8 +2,7 @@
 
 QueryDB* QueryDB::instance = nullptr;
 
-int QueryDB::callback(void* NotUsed, int argc, char** argv, char** azColName)
-{
+int QueryDB::callback(void* NotUsed, int argc, char** argv, char** azColName) {
 	for (int i{}; i < argc; i++)
 		    {        
 		        std::cout << std::setw(15) << azColName[i] << " : " 
@@ -13,15 +12,13 @@ int QueryDB::callback(void* NotUsed, int argc, char** argv, char** azColName)
 		    return 0;
 }
 
-QueryDB* QueryDB::getInstance()
-{
+QueryDB* QueryDB::getInstance() {
 	if (instance == nullptr)
         instance = new QueryDB();
 	return instance;
 }
 
-int QueryDB::querySQL(const std::string& query, int(*method)(void*, int, char**, char**))
-{
+int QueryDB::querySQL(const std::string& query, int(*method)(void*, int, char**, char**)) {
     sqlite3* db;
     char* zErrMsg{};
     int rc = sqlite3_open(dbName.c_str(), &db);
@@ -43,8 +40,8 @@ int QueryDB::querySQL(const std::string& query, int(*method)(void*, int, char**,
     sqlite3_close(db);
     return 1;
 }
-sqlite3_stmt* QueryDB::selectSQL(const std::string& query)
-{
+
+sqlite3_stmt* QueryDB::selectSQL(const std::string& query) {
     sqlite3* db;
     sqlite3_stmt* stmt;
     //char* zErrMsg{};
@@ -59,16 +56,14 @@ sqlite3_stmt* QueryDB::selectSQL(const std::string& query)
     sqlite3_close(db);
     return stmt;
 }
-int QueryDB::getIdByLogin(std::string login)
-{
+int QueryDB::getIdByLogin(std::string login) {
     sqlite3_stmt* stmt{ nullptr };
     std::string query = "SELECT id FROM users WHERE login ='" + login + "';";
     stmt = selectSQL(query);
     return sqlite3_column_int(stmt, 0);
 }
 
-bool QueryDB::updateData(std::string tabName, std::string colName, std::string sel, int id, auto& val)
-{
+bool QueryDB::updateData(std::string tabName, std::string colName, std::string sel, int id, auto& val) {
     std::string query = "UPDATE " + tabName + " SET " + colName +
         "='" + val + "' WHERE " + sel + "='" + id + "';";
     int rc = querySQL(query);

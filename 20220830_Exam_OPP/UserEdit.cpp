@@ -2,15 +2,13 @@
 
 UserEdit* UserEdit::instance = nullptr;
 
-UserEdit* UserEdit::getInstance()
-{
+UserEdit* UserEdit::getInstance() {
 	if (instance == nullptr)
 		instance = new UserEdit();
 	return nullptr;
 }
 
-bool UserEdit::create()
-{
+bool UserEdit::create() {
 	QueryDB* db = QueryDB::getInstance();
 	std::string select, insert;
 	std::string login, pass;
@@ -97,9 +95,9 @@ std::string UserEdit::inputStr(std::string&& text, std::regex rgX, int y, bool s
 }
 
 
-bool UserEdit::edit(auto& obj)
-{
+bool UserEdit::edit(auto& obj) {
     return false;
 }
+
 //
 //UserEdit::~UserEdit() {	if (uM != nullptr) delete uM; }
