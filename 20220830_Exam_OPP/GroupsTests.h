@@ -10,8 +10,8 @@ class GroupsTests
 private:
 	int idGrTest;
 	std::string nameGroup;
-	std::string tableName;
 	int countTest;
+	std::string tableName;	
 	std::vector<GroupTest>* grTest;
 
 public:

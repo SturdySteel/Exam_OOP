@@ -7,6 +7,7 @@
 #include "queryDB.h"
 #include "ManipulCursor.h"
 #include "Menu.h"
+#include "ITests.h"
 //#include "ArrayMenu.h"
 
 class UserExten

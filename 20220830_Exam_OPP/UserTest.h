@@ -2,8 +2,8 @@
 #define USERTEST_H
 #include <vector>
 
-struct DataTest
-{	int num;			// номер в таблице пройденых тестов
+struct DataTest {
+	int num;			// номер в таблице пройденых тестов
 	int groupNum;		// номер группы тестов
 	int subGroupNum;	// номер подгруппы тестов
 	int testNum;		// номер теста

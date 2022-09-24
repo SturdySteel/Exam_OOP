@@ -72,7 +72,7 @@ bool UserEdit::create() {
 		+ birthday + "','" + registerDate + "','" + phone + "');";
 	if (!db->querySQL(insert))
 		return 0;
-
+	sqlite3_finalize(stmt);
 	return 1;
 
 }

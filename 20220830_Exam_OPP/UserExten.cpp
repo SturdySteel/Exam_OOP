@@ -52,7 +52,10 @@ void UserExten::testsMenu() {
 		switch (c)
 		{
 		case 0:
-			//listTest()
+			//listTest();
+			ITests tst;
+			tst.getAllTests();
+			system("pause");
 			break;
 		case 1:
 

@@ -37,6 +37,7 @@ public:
 	void setLogin(std::string login);
 	void setPass(std::string pass);
 	void setSU(bool su);
+
 	void setDataUL(int users_id, std::string inn, std::string name, std::string surname,
 		std::string birthday, std::string registerDate, std::string phone);
 

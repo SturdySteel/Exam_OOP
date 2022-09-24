@@ -5,7 +5,7 @@ GroupsTests::GroupsTests():
 	nameGroup{},
 	tableName{},
 	countTest{},
-	grTest{new std::vector<GroupTest> }
+	grTest{ new std::vector<GroupTest> }
 {}
 
 void GroupsTests::setIdGrTest(int idGrTest) {

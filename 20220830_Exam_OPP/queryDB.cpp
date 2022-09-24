@@ -33,9 +33,9 @@ int QueryDB::querySQL(const std::string& query, int(*method)(void*, int, char**,
     if (rc != SQLITE_OK)
     {
         std::cerr << "SQL error " << zErrMsg << "\n";
-        std::cout << "rc = " << rc << "\n";
+        //std::cout << "rc = " << rc << "\n";
         sqlite3_free(zErrMsg);
-        return rc;
+        return 0;
     }
     sqlite3_close(db);
     return 1;
@@ -53,7 +53,7 @@ sqlite3_stmt* QueryDB::selectSQL(const std::string& query) {
     }
     sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, 0);
     sqlite3_step(stmt);
-    sqlite3_close(db);
+    sqlite3_close_v2(db);
     return stmt;
 }
 int QueryDB::getIdByLogin(std::string login) {

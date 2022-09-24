@@ -109,7 +109,7 @@ bool UserLogin::autorization()
 	int i{};
 	while (this->id == 0)
 	{
-		if (i++ >= 3) return 0;
+		if (i++ >= 3) { sqlite3_finalize(stmt); return 0; }
 		system("cls");
 		rgX = R"(\w{5,})";
 		login = usEd->inputStr("Авторизация\nЛогин: ", rgX, 0);
@@ -132,6 +132,7 @@ bool UserLogin::autorization()
 	if (stmt == nullptr || sqlite3_column_int(stmt, 0) == 0)
 	{
 		this->dataUL = new UserData;
+		sqlite3_finalize(stmt);
 		return 1;
 	}
 	setDataUL(sqlite3_column_int(stmt, 0),
@@ -142,6 +143,7 @@ bool UserLogin::autorization()
 		reinterpret_cast<const char*>(sqlite3_column_text(stmt, 5)),
 		reinterpret_cast<const char*>(sqlite3_column_text(stmt, 6)));
 
+	sqlite3_finalize(stmt);
 	return 1;
 }
 

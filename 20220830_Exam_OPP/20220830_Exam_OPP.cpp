@@ -62,27 +62,26 @@ int main()
     
     UserLogin usr;
     AdminExten adm{ admMenuArr };
-    //UserExten usr{ userMenuArr };
+    //UserExten user{ userMenuArr };
    
-    /*GroupsTests* tests{};
-    tests->setGrTest();*/
+    adm.menu();
 
+    
+    //while (true) {       
+    //    usr.menuMain(mainMenu);
+    //    //user.show();
 
-    while (true) {       
-        usr.menuMain(mainMenu);
-        //user.show();
-
-        switch (usr.getSU()) {
-        case true:
-            
-            adm.menu();
-            std::cout << usr.getLogin() << "\n";
-            break;
-        case false:
-            std::cout << usr.getLogin() << "\n";
-            break;        
-        }
-    }
+    //    switch (usr.getSU()) {
+    //    case true:
+    //        
+    //        adm.menu();
+    //        std::cout << usr.getLogin() << "\n";
+    //        break;
+    //    case false:
+    //        std::cout << usr.getLogin() << "\n";
+    //        break;        
+    //    }
+    //}
 
 	return 0;
 }
