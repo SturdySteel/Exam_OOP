@@ -7,18 +7,18 @@
 #include "Test.h"
 #include "TestLine.h"
 #include "queryDB.h"
-#include <boost/locale.hpp>
+//#include <boost/locale.hpp>
 
 class ITests
 {
 private:
-	//std::vector<GroupsTests>* allTests{ nullptr };
+	std::vector<GroupsTests>* allTests{ nullptr };
 
 public:
 	ITests();
 
 	void getAllTests();
-	void setAllTest();
+	//void setAllTest();
 
 	~ITests();
 };

@@ -45,15 +45,17 @@ void UserExten::usersMenu()
 	}
 }
 
-void UserExten::testsMenu() {
-	while (true) 	{
+void UserExten::testsMenu() 
+{
+	ITests tst;
+	while (true) 	
+	{
 		system("cls");
 		int c = Menu::select_vertical(menuArr[2], HorizontalAlignment::Left, 0);
 		switch (c)
 		{
 		case 0:
-			//listTest();
-			ITests tst;
+			//listTest();			
 			tst.getAllTests();
 			system("pause");
 			break;
