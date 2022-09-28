@@ -9,7 +9,7 @@
 #include "MD5.h"
 #include "queryDB.h"
 #include "ManipulCursor.h"
-#include "UserEdit.h"
+#include "DataEdit.h"
 
 //typedef std::basic_string <unsigned char> ustring;
 

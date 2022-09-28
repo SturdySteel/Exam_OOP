@@ -42,9 +42,6 @@
     <ClCompile Include="UserExten.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UserEdit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GroupsTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -61,6 +58,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ITests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataEdit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,9 +92,6 @@
     <ClInclude Include="UserExten.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UserEdit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GroupsTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -111,6 +108,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ITests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataEdit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,8 +4,8 @@ GroupsTests::GroupsTests():
 	idGrTest{},
 	nameGroup{},
 	tableName{},
-	countTest{},
-	grTest{ new std::vector<GroupTest> }
+	countTest{}
+	//grTest{ new std::vector<GroupTest> }
 {}
 
 void GroupsTests::setIdGrTest(int idGrTest) {
@@ -25,7 +25,7 @@ void GroupsTests::setCountTest(int countTest) {
 }
 
 void GroupsTests::setGrTest(GroupTest& val) {
-	grTest->push_back(val);
+	this->grTest.push_back(val);
 }
 
 int GroupsTests::getIdGrTest() {
@@ -45,16 +45,16 @@ int GroupsTests::getCountTest() {
 }
 
 std::vector<GroupTest>& GroupsTests::getGrTest() {
-	return *this->grTest;
+	return this->grTest;
 }
 
 GroupsTests& GroupsTests::getGroupsTests() {
 	return *this;
 }
 
-GroupsTests::~GroupsTests() {
-	if (grTest != nullptr) {
-		this->grTest->clear();
-		delete grTest;
-	}
-}
+//GroupsTests::~GroupsTests() {
+//	if (grTest != nullptr) {
+//		this->grTest->clear();
+//		delete grTest;
+//	}
+//}

@@ -4,8 +4,8 @@ SubGroupTest::SubGroupTest():
 	numTest{},
 	nameTest{},
 	tableNameTest{},
-	countQuestions{},
-	tests{ new std::vector<Test> }
+	countQuestions{}
+	//tests{ new std::vector<Test> }
 {}
 
 void SubGroupTest::setNumTest(int numTest) {
@@ -26,7 +26,7 @@ void SubGroupTest::setCountQuestions(int countQuestions) {
 }
 
 void SubGroupTest::setTests(Test& test) {
-	tests->push_back(test);
+	this->tests.push_back(test);
 }
 
 int SubGroupTest::getNumTest() { 
@@ -45,16 +45,16 @@ int SubGroupTest::getCountQuestions() {
 }
 
 std::vector<Test>& SubGroupTest::getTests() { 
-	return *tests; 
+	return this->tests; 
 }
 
 SubGroupTest& SubGroupTest::getSubGroup() {	
 	return *this; 
 }
 
-SubGroupTest::~SubGroupTest() {
-	if (tests != nullptr) {
-		this->tests->clear();
-		delete tests;
-	}
-}
+//SubGroupTest::~SubGroupTest() {
+//	if (tests != nullptr) {
+//		this->tests->clear();
+//		delete tests;
+//	}
+//}

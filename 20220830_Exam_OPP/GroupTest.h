@@ -11,7 +11,7 @@ private:
 	int numGroupTest;
 	std::string nameGroupTest;
 	std::string tableGroupTest;
-	std::vector<SubGroupTest>* subGrTest;
+	std::vector<SubGroupTest> subGrTest;
 
 public:
 	GroupTest();
@@ -28,7 +28,7 @@ public:
 
 	GroupTest& getGroupTest();
 
-	~GroupTest();
+	//~GroupTest();
 };
 
 #endif // !GROUPTEST_H

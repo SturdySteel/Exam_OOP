@@ -1,6 +1,6 @@
 #include "UserExten.h"
 
-UserExten::UserExten(std::vector<std::vector<std::string>>& menuArr) :
+UserExten::UserExten(std::vector<std::vector<std::string>*> menuArr) :
 	menuArr{ menuArr }
 {}
 
@@ -9,7 +9,7 @@ void UserExten::menu()
 	while (true)
 	{
 		system("cls");
-		int c = Menu::select_vertical(menuArr[0], HorizontalAlignment::Left, 0);
+		int c = Menu::select_vertical(*menuArr[0], HorizontalAlignment::Left, 0);
 		switch (c)
 		{
 		case 0:	usersMenu(); break;
@@ -25,7 +25,7 @@ void UserExten::usersMenu()
 	while (true)
 	{
 		system("cls");
-		int c = Menu::select_vertical(menuArr[1], HorizontalAlignment::Left, 0);
+		int c = Menu::select_vertical(*menuArr[1], HorizontalAlignment::Left, 0);		
 		switch (c)
 		{
 		case 0:
@@ -35,7 +35,8 @@ void UserExten::usersMenu()
 
 			break;
 		case 2:
-
+			if ((*menuArr[1]).size() == 3)
+				return;
 			break;
 		case 3:
 			return;
@@ -51,18 +52,24 @@ void UserExten::testsMenu()
 	while (true) 	
 	{
 		system("cls");
-		int c = Menu::select_vertical(menuArr[2], HorizontalAlignment::Left, 0);
+		int c = Menu::select_vertical(*menuArr[2], HorizontalAlignment::Left, 0);
 		switch (c)
 		{
 		case 0:
 			//listTest();			
 			tst.getAllTests();
+			
 			system("pause");
 			break;
 		case 1:
-
+			tst.getGroupsTest();
+			system("pause");
 			break;
 		case 2:
+			if ((*menuArr[2]).size() == 3)
+				return;
+			tst.setAllTests();
+			system("pause");
 			//addTest();
 			break;
 		case 3:

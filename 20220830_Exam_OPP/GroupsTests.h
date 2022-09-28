@@ -12,7 +12,7 @@ private:
 	std::string nameGroup;
 	int countTest;
 	std::string tableName;	
-	std::vector<GroupTest>* grTest;
+	std::vector<GroupTest> grTest;
 
 public:
 	GroupsTests();
@@ -31,7 +31,7 @@ public:
 
 	GroupsTests& getGroupsTests();
 
-	~GroupsTests();
+	//~GroupsTests();
 };
 
 #endif // !GROUPSTESTS_H

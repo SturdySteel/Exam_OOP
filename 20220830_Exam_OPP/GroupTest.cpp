@@ -3,8 +3,8 @@
 GroupTest::GroupTest():
 	numGroupTest{},
 	nameGroupTest{},
-	tableGroupTest{},
-	subGrTest{ new std::vector<SubGroupTest> }
+	tableGroupTest{}
+	//subGrTest{ new std::vector<SubGroupTest> }
 {}
 
 void GroupTest::setNumGroupTest(int numGroupTest) {
@@ -20,7 +20,7 @@ void GroupTest::setTableGroupTest(std::string tableGroupTest) {
 }
 
 void GroupTest::setSubGrTest(SubGroupTest& val) {
-	subGrTest->push_back(val);
+	this->subGrTest.push_back(val);
 }
 
 int GroupTest::getNumGroupTest() {
@@ -36,16 +36,16 @@ std::string GroupTest::getTableGroupTest() {
 }
 
 std::vector<SubGroupTest>& GroupTest::getSubGrTest() {
-	return *this->subGrTest;
+	return this->subGrTest;
 }
 
 GroupTest& GroupTest::getGroupTest() {
 	return *this;
 }
 
-GroupTest::~GroupTest() {
-	if (subGrTest != nullptr) {
-		this->subGrTest->clear();
-		delete subGrTest;
-	}
-}
+//GroupTest::~GroupTest() {
+//	if (subGrTest != nullptr) {
+//		this->subGrTest->clear();
+//		delete subGrTest;
+//	}
+//}

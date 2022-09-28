@@ -13,11 +13,11 @@
 class UserExten
 {
 protected:
-	std::vector<std::vector<std::string>> menuArr;
+	std::vector<std::vector<std::string>*> menuArr;
 	//std::vector<void(*)()> swArr;
 
 public:
-	UserExten(std::vector<std::vector<std::string>>& menuArr);
+	UserExten(std::vector<std::vector<std::string>*> menuArr);
 
 	virtual void menu();
 	virtual void usersMenu();
@@ -30,7 +30,7 @@ class AdminExten : public UserExten
 private:
 	
 public:
-	AdminExten(std::vector<std::vector<std::string>>& menuArr) : UserExten(menuArr) {}
+	AdminExten(std::vector<std::vector<std::string>*> menuArr) : UserExten(menuArr) {}
 
 };
 

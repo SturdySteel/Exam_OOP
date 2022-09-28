@@ -100,7 +100,7 @@ UserLogin::~UserLogin() { if(dataUL != nullptr) delete dataUL; }
 
 bool UserLogin::autorization()
 {
-	UserEdit* usEd = UserEdit::getInstance();
+	DataEdit* dataEd = DataEdit::getInstance();
 	QueryDB* db = QueryDB::getInstance();
 	this->id = 0;
 	std::string login, pass, select;
@@ -112,8 +112,8 @@ bool UserLogin::autorization()
 		if (i++ >= 3) { sqlite3_finalize(stmt); return 0; }
 		system("cls");
 		rgX = R"(\w{5,})";
-		login = usEd->inputStr("Àâòîğèçàöèÿ\nËîãèí: ", rgX, 0);
-		pass = md5(usEd->inputStr("Ïàğîëü: ", rgX, 2, false));				
+		login = dataEd->inputStr("Àâòîğèçàöèÿ\nËîãèí: ", rgX, 0);
+		pass = md5(dataEd->inputStr("Ïàğîëü: ", rgX, 2, false));				
 		select = "SELECT * FROM users WHERE login='" + login + "' AND password ='" + pass + "';";				
 		stmt = db->selectSQL(select);
 		this->id = sqlite3_column_int(stmt, 0);
@@ -149,6 +149,6 @@ bool UserLogin::autorization()
 
 bool UserLogin::registration()
 {	
-	UserEdit* usEd = UserEdit::getInstance();
-	return usEd->create();
+	DataEdit* dataEd = DataEdit::getInstance();
+	return dataEd->create();
 }

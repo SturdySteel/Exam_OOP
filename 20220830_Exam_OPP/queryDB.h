@@ -22,6 +22,8 @@ public:
     int querySQL(const std::string& query, int(*method)(void*, int, char**, char**) = 0);
     sqlite3_stmt* selectSQL(const std::string& query);
     int getIdByLogin(std::string login);
+    //int getPrKeyByTabName(std::string tabName, std::string colName);
+
 
     bool updateData(std::string tabName, std::string colName, 
         std::string sel, int id, auto& val);

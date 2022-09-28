@@ -9,7 +9,7 @@ class Test
 //public:
 private:
 	std::string nameTable;
-	std::vector<TestLine>* arrTest;
+	std::vector<TestLine> arrTest;
 	
 public:
 	Test();
@@ -18,7 +18,7 @@ public:
 	void setNameTab(std::string nameTable);
 	Test& getTest();
 
-	~Test();
+	//~Test();
 };
 
 #endif // !TEST_H

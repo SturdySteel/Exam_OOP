@@ -56,12 +56,23 @@ sqlite3_stmt* QueryDB::selectSQL(const std::string& query) {
     sqlite3_close_v2(db);
     return stmt;
 }
+
 int QueryDB::getIdByLogin(std::string login) {
     sqlite3_stmt* stmt{ nullptr };
     std::string query = "SELECT id FROM users WHERE login ='" + login + "';";
     stmt = selectSQL(query);
     return sqlite3_column_int(stmt, 0);
 }
+
+//int QueryDB::getPrKeyByTabName(std::string tabName, std::string colName)
+//{
+//    sqlite3_stmt* stmt{ nullptr };
+//    std::string query = "SELECT " + colName + " FROM " + tabName +" WHERE login = '" + login + "'; ";
+//    stmt = selectSQL(query);
+//    sqlite3_column_int(stmt, 0);
+//}
+
+
 
 bool QueryDB::updateData(std::string tabName, std::string colName, std::string sel, int id, auto& val) {
     std::string query = "UPDATE " + tabName + " SET " + colName +

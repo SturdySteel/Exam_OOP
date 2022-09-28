@@ -16,7 +16,8 @@ private:
 
 public:
 	TestLine();	
-	//TestLine(TestLine& line);
+	TestLine(int numQ, std::string question, std::string answer01, std::string answer02,
+		std::string answer03, std::string answer04, int rightAnswer);
 	
 	void setNumQ(int numQ);
 	void setQuestion(std::string question);

@@ -36,45 +36,38 @@ std::vector<std::string> admTestsMenu
 
 std::vector<std::string> userMenu
 {
-	"Просмотр теста",
-	"Выбрать тест",
+	"Пользователь инфо",
+	"Пользователь тесты",
 	"Возврат"
 };
 
-std::vector<std::vector<std::string>> admMenuArr
+std::vector<std::string> userUserMenu
 {
-	adminMenu,
-	admUsersMenu,
-	admTestsMenu
+	"Просмотр пользователя",
+	"Редактировать пользователя",	
+	"Возврат"
 };
 
-std::vector<std::vector<std::string>> userMenuArr
+std::vector<std::string> userTestsMenu
 {
-	userMenu
+	"Просмотр/выбор тестов",
+	"Результаты",
+	"Возврат"
 };
 
-//std::vector<std::string> userTestsMenu
-//{
-//	"Просмотр тестов",
-//	"",
-//	"Возврат"
-//};
+std::vector<std::vector<std::string>*> admMenuArr
+{
+	&adminMenu,
+	&admUsersMenu,
+	&admTestsMenu
+};
 
-//class ShowMenu
-//{
-//private:
-//	std::vector<std::string> menu;
-//	bool mainM;
-//
-//public:
-//	ShowMenu(std::vector<std::string> menu, bool mainM = false) :
-//		menu{ menu },
-//		mainM{ mainM }
-//	{}
-//
-//	void menu(std::vector<std::string> menu);
-//	
-//};
+std::vector<std::vector<std::string>*> userMenuArr
+{
+	&userMenu,
+	&userUserMenu,
+	&userTestsMenu,
 
+};
 
 #endif // !ARRAYMENU_H

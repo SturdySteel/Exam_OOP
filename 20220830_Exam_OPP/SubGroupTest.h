@@ -12,7 +12,7 @@ private:
 	std::string nameTest;
 	std::string tableNameTest;
 	int countQuestions;
-	std::vector<Test>* tests{ nullptr };
+	std::vector<Test> tests;
 
 public:
 	SubGroupTest();
@@ -31,7 +31,7 @@ public:
 
 	SubGroupTest& getSubGroup();
 
-	~SubGroupTest();
+	//~SubGroupTest();
 };
 
 #endif // !SUBGROUPTEST_H

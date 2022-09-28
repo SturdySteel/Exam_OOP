@@ -10,15 +10,16 @@ TestLine::TestLine() :
 	rightAnswer{}
 {}
 
-//TestLine::TestLine(TestLine& line) :
-//	numQ{line.numQ},
-//	question{ line.question },
-//	answer01{ line.answer01 },
-//	answer02{ line.answer02 },
-//	answer03{ line.answer03 },
-//	answer04{ line.answer04 },
-//	rightAnswer{ line.rightAnswer }
-//{}
+TestLine::TestLine(int numQ, std::string question, std::string answer01, std::string answer02, 
+	std::string answer03, std::string answer04, int rightAnswer) :
+	numQ{numQ},
+	question{ question },
+	answer01{ answer01 },
+	answer02{ answer02 },
+	answer03{ answer03 },
+	answer04{ answer04 },
+	rightAnswer{ rightAnswer }
+{}
 
 void TestLine::setNumQ(int numQ) { this->numQ = numQ; }
 void TestLine::setQuestion(std::string question) { this->question = question; }

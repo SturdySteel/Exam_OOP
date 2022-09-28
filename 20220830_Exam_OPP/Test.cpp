@@ -1,12 +1,12 @@
 #include "Test.h"
 
 Test::Test() :
-	nameTable{},
-	arrTest{ new std::vector<TestLine> }
+	nameTable{}
+	//arrTest{ new std::vector<TestLine> }
 {}
 
 void Test::setTestLine(TestLine& line) {
-	this->arrTest->push_back(line);
+	this->arrTest.push_back(line);
 }
 
 void Test::setNameTab(std::string nameTable) {
@@ -17,9 +17,9 @@ Test& Test::getTest() {
 	return *this;
 }
 
-Test::~Test() {
-	if (arrTest != nullptr) {
-		this->arrTest->clear();
-		delete arrTest;
-	}
-}
+//Test::~Test() {
+//	if (arrTest != nullptr) {
+//		this->arrTest->clear();
+//		delete arrTest;
+//	}
+//}

@@ -1,8 +1,9 @@
-#ifndef USEREDIT_H
-#define USEREDIT_H
+#ifndef DATAEDIT_H
+#define DATAEDIT_H
 #include <string>
 #include <vector>
 #include <regex>
+#include <locale>
 #include <iterator>
 //#include "UserData.h"
 #include "Menu.h"
@@ -11,18 +12,19 @@
 #include "ManipulCursor.h"
 #include "UserLogin.h"
 
-
-class UserEdit
+class DataEdit
 {
 private:
-	static UserEdit* instance;
-	UserEdit() {}
+	static DataEdit* instance;
+	DataEdit() {}
 
 public:
-	static UserEdit* getInstance();
-	bool create();	
+	static DataEdit* getInstance();
+	bool create();
 	std::string inputStr(std::string&& text, std::regex rgX, int y, bool sw = true);
-	bool edit(auto& obj);	
-};
+	void cp866_cp1251(std::string& s);
 
-#endif // !USEREDIT_H
+	//bool edit(auto& obj);	
+
+};
+#endif // !DATAEDIT_H

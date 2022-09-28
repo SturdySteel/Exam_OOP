@@ -5,10 +5,11 @@
 #include <stdlib.h>
 #include <sstream>
 #include <vector>
+#include <locale>
 #include "ArrayMenu.h"
 #include "UserLogin.h"
 #include "UserExten.h"
-#include "UserEdit.h"
+#include "DataEdit.h"
 #include "GroupsTests.h"
 
 //#include "UserData.h"
@@ -60,13 +61,16 @@
 int main()
 {
     setlocale(LC_ALL, "ru");   
-    
+    //std::locale::global(std::locale(""));
+
     UserLogin usr;
     AdminExten adm{ admMenuArr };
-    //UserExten user{ userMenuArr };
+    UserExten user{ userMenuArr };
    
-    //adm.menu();
-
+    //DEBUG. comment for run normaly 
+    adm.menu();
+    exit(0);
+    //////////////////////////////
     
     while (true) {       
         usr.menuMain(mainMenu);
@@ -76,9 +80,10 @@ int main()
         case true:
             
             adm.menu();
-            std::cout << usr.getLogin() << "\n";
+            //std::cout << usr.getLogin() << "\n";
             break;
         case false:
+            user.menu();
             std::cout << usr.getLogin() << "\n";
             break;        
         }

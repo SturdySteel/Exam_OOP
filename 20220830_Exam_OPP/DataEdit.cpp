@@ -1,14 +1,14 @@
-#include "UserEdit.h"
+#include "DataEdit.h"
 
-UserEdit* UserEdit::instance = nullptr;
+DataEdit* DataEdit::instance = nullptr;
 
-UserEdit* UserEdit::getInstance() {
+DataEdit* DataEdit::getInstance() {
 	if (instance == nullptr)
-		instance = new UserEdit();
+		instance = new DataEdit();
 	return nullptr;
 }
 
-bool UserEdit::create() {
+bool DataEdit::create() {
 	QueryDB* db = QueryDB::getInstance();
 	std::string select, insert;
 	std::string login, pass;
@@ -76,28 +76,41 @@ bool UserEdit::create() {
 	return 1;
 
 }
-
-std::string UserEdit::inputStr(std::string&& text, std::regex rgX, int y, bool sw) //if false text printed Black
+//"sw" = false text printed Black, by default White
+// "int y" coordinates by y-axes
+std::string DataEdit::inputStr(std::string&& text, std::regex rgX, int y, bool sw)
 {
-	std::string val;
+	std::string val;	
 	do {
 		setPosition(0, y);
-		std::cout << "                                         ";
+		std::cout << "                                                           \n";
+		std::cout << "                                                           \n";
 		val = "";
 		setPosition(0, y);
 		std::cout << text;
 		setColor(sw ? ConsoleColor::White : ConsoleColor::Black);
 		getline(std::cin, val);
 		setColor(ConsoleColor::White);
+		cp866_cp1251(val);
 		//std::cin.ignore(32768, '\n');			
 	} while (!(std::regex_match(val.data(), rgX)));
 	return val;
 }
 
-
-bool UserEdit::edit(auto& obj) {
-    return false;
+void DataEdit::cp866_cp1251(std::string& s)
+{
+	for (char* c = (char*)s.c_str(); *c != 0; ++c)
+	{
+		if (*c > -129 && *c < -80)
+			*c += 64;
+		else if (*c > -33 && *c < -16)
+			*c += 16;
+	}
 }
 
+//bool DataEdit::edit(auto& obj) {
+//    return false;
+//}
+
 //
-//UserEdit::~UserEdit() {	if (uM != nullptr) delete uM; }
+//DataEdit::~DataEdit() {	if (uM != nullptr) delete uM; }
