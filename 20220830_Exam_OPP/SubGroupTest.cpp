@@ -1,56 +1,29 @@
 #include "SubGroupTest.h"
 
-SubGroupTest::SubGroupTest():
-	numTest{},
-	nameTest{},
-	tableNameTest{},
-	countQuestions{}
+SubGroupTest::SubGroupTest() :
+	numGrTest{},
+	nameGroupTest{},
+	tableGroupTest{}
 	//tests{ new std::vector<Test> }
 {}
 
-void SubGroupTest::setNumTest(int numTest) {
-	this->numTest = numTest;
-}
+void SubGroupTest::setNumGrTest(int numGrTest) { this->numGrTest = numGrTest; }
 
+void SubGroupTest::setNameGroupTest(std::string nameGroupTest) { this->nameGroupTest = nameGroupTest; }
 
-void SubGroupTest::setNameTest(std::string nameTest) {
-	this->nameTest = nameTest;
-}
+void SubGroupTest::setTableGroupTest(std::string tableGroupTest) { this->tableGroupTest = tableGroupTest; }
 
-void SubGroupTest::setTableNameTest(std::string tableNameTest) {
-	this->tableNameTest = tableNameTest;
-}
+int SubGroupTest::getNumGrTest() { return this->numGrTest; }
 
-void SubGroupTest::setCountQuestions(int countQuestions) {
-	this->countQuestions = countQuestions;
-}
+std::string SubGroupTest::getNameGroupTest() { return this->nameGroupTest; }
 
-void SubGroupTest::setTests(Test& test) {
-	this->tests.push_back(test);
-}
+std::string SubGroupTest::getTableGroupTest() { return this->tableGroupTest; }
 
-int SubGroupTest::getNumTest() { 
-	return this->numTest; 
-}
+std::vector<Test>& SubGroupTest::getTests() { return this->tests; }
 
-std::string SubGroupTest::getNameTest() { 
-	return this->nameTest; 
-}
+void SubGroupTest::setTests(Test& test) { this->tests.push_back(test); }
 
-std::string SubGroupTest::getTableNameTest() { 
-	return this->tableNameTest; 
-}
-int SubGroupTest::getCountQuestions() { 
-	return this->countQuestions; 
-}
-
-std::vector<Test>& SubGroupTest::getTests() { 
-	return this->tests; 
-}
-
-SubGroupTest& SubGroupTest::getSubGroup() {	
-	return *this; 
-}
+SubGroupTest& SubGroupTest::getSubGroup() {	return *this; }
 
 //SubGroupTest::~SubGroupTest() {
 //	if (tests != nullptr) {

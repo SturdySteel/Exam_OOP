@@ -1,21 +1,32 @@
 #include "Test.h"
 
 Test::Test() :
-	nameTable{}
+	numTest{},
+	nameTest{},
+	tableNameTest{},
+	countQuestions{}
 	//arrTest{ new std::vector<TestLine> }
 {}
 
-void Test::setTestLine(TestLine& line) {
-	this->arrTest.push_back(line);
-}
+void Test::setTestLine(TestLine& line) { this->arrTest.push_back(line); }
 
-void Test::setNameTab(std::string nameTable) {
-	this->nameTable = nameTable;
-}
+void Test::setNumTest(int numTest) { this->numTest = numTest; }
 
-Test& Test::getTest() {
-	return *this;
-}
+void Test::setNameTest(std::string nameTest) { this->nameTest = nameTest; }
+
+void Test::setTableNameTest(std::string tableNameTest) { this->tableNameTest = tableNameTest; }
+
+void Test::setCountQuestions(int countQuestions) { this->countQuestions = countQuestions; }
+
+int Test::getNumTest() { return this->numTest; }
+
+std::string Test::getNameTest() { return this->nameTest; }
+
+std::string Test::getTableNameTest() { return this->tableNameTest; }
+
+int Test::getCountQuestions() {	return this->countQuestions; }
+
+Test& Test::getTest() { return *this; }
 
 //Test::~Test() {
 //	if (arrTest != nullptr) {

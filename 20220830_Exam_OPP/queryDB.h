@@ -27,6 +27,11 @@ public:
 
     bool updateData(std::string tabName, std::string colName, 
         std::string sel, int id, auto& val);
+
+    void createGroupsTests(std::string str);
+    void createGroupTest(std::string str);
+    void createSubGroupTest(std::string str);
+    void createTest(std::string str);
     
 };
 //"INSERT INTO USERS(login,password,superuser) VALUES ('" + login 

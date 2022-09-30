@@ -8,22 +8,25 @@ class GroupTest
 {
 //public:
 private:
-	int numGroupTest;
-	std::string nameGroupTest;
-	std::string tableGroupTest;
+	int idGrTest;
+	std::string nameGroup;
+	int countTest;
+	std::string tableName;	
 	std::vector<SubGroupTest> subGrTest;
 
 public:
 	GroupTest();
 
-	void setNumGroupTest(int numGroupTest);
-	void setNameGroupTest(std::string nameGroupTest);
-	void setTableGroupTest(std::string tableGroupTest);
+	void setIdGrTest(int idGrTest);
+	void setNameGroup(std::string nameGroup);
+	void setTableName(std::string tableName);
+	void setCountTest(int countTest);		
 	void setSubGrTest(SubGroupTest& val);
 
-	int getNumGroupTest();
-	std::string getNameGroupTest();
-	std::string getTableGroupTest();
+	int getIdGrTest();
+	std::string getNameGroup();
+	std::string getTableName();
+	int getCountTest();	
 	std::vector<SubGroupTest>& getSubGrTest();
 
 	GroupTest& getGroupTest();

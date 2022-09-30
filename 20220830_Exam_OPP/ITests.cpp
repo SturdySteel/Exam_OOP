@@ -1,18 +1,15 @@
 #include "ITests.h"
 
-ITests::ITests() :
-	grTests{ new GroupsTests },
+ITests::ITests() :	
 	grTest{ new GroupTest },
 	subGrTest{ new SubGroupTest },
-	test{ new Test }
-	//tesLine{ new TestLine },
+	test{ new Test },
+	tesLine{ new TestLine }
 	//allTests{ new std::vector<GroupsTests> }
 {}
 
 ITests::~ITests()
 {
-	if (grTests != nullptr)
-		delete grTests;
 	if (grTest != nullptr)
 		delete grTest;
 	if (subGrTest != nullptr)
@@ -63,23 +60,50 @@ void ITests::setAllTests()
 	DataEdit* dataEd = DataEdit::getInstance();
 	std::string	query{};
 	std::string str;
-	std::regex rgX{ "(\[A-яа-€A-Za-z]{5,})" };	
+	std::regex rgX{ "(\[A-яа-€A-Za-z]{5,})" };			
 	str = dataEd->inputStr("¬ведите название группы тестов (ru/en): ", rgX, 0);
-	std::cout << str << "\n";
-	grTests->setNameGroup(str);
+	//grTests->setNameGroup(str);
 	rgX= R"(\w{5,})";
-	grTests->setTableName(dataEd->inputStr("¬ведите название таблицы группы тестов (en): ", rgX, 0));
-	std::cout << grTests->getNameGroup() << " " << grTests->getTableName();
-	allTests.push_back(*grTests);
-	grTests = new GroupsTests;
+	str = dataEd->inputStr("¬ведите название таблицы группы тестов (en): ", rgX, 1);
+	//grTests->setTableName(str);
+	//grTests->setCountTest(0);
+
+	//grTest->setNameGroupTest();
+
+
+	//allTests.push_back(*grTests);
+	//grTests = new GroupsTests;
 }
 
 void ITests::getGroupsTest()
 {
-	if(grTests != nullptr)
+	/*if(grTests != nullptr)
 		std::cout << grTests->getNameGroup() << " " << grTests->getTableName() << "\n";
 	if(allTests.size() != 0)
-		std::cout << allTests[0].getNameGroup() << "\n";
+		std::cout << allTests[0].getNameGroup() << "\n";*/
 }
 
+Test ITests::setTest()
+{	
+	QueryDB* db = QueryDB::getInstance();
+	DataEdit* dataEd = DataEdit::getInstance();
+	std::string	query{};
+	std::string str;
+	std::regex rgX{ R"(\w{5,})" };
+	str = dataEd->inputStr("¬ведите название таблицы теста (en): ", rgX, 0);
+	//query = "SELECT tableNameTest FROM ";
+	return Test();
+}
+
+void ITests::setGrTest(GroupTest& val) {
+	this->arrTests.push_back(val);
+}
+
+std::vector<GroupTest>& ITests::getGrTest() {
+	return this->arrTests;
+}
+
+ITests& ITests::getGroupTest() {
+	return *this;
+}
 

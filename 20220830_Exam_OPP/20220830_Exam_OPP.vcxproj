@@ -132,7 +132,6 @@
   <ItemGroup>
     <ClCompile Include="20220830_Exam_OPP.cpp" />
     <ClCompile Include="DataEdit.cpp" />
-    <ClCompile Include="GroupsTests.cpp" />
     <ClCompile Include="GroupTest.cpp" />
     <ClCompile Include="ITests.cpp" />
     <ClCompile Include="ManipulCursor.cpp" />
@@ -150,7 +149,6 @@
   <ItemGroup>
     <ClInclude Include="ArrayMenu.h" />
     <ClInclude Include="DataEdit.h" />
-    <ClInclude Include="GroupsTests.h" />
     <ClInclude Include="GroupTest.h" />
     <ClInclude Include="ITests.h" />
     <ClInclude Include="ManipulCursor.h" />

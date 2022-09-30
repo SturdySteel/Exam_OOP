@@ -3,7 +3,6 @@
 #include <fstream>
 #include <locale>
 #include <regex>
-#include "GroupsTests.h"
 #include "GroupTest.h"
 #include "SubGroupTest.h"
 #include "Test.h"
@@ -15,20 +14,27 @@
 
 class ITests
 {
-private:
-	GroupsTests* grTests{ nullptr };
+private:	
 	GroupTest* grTest{ nullptr };
 	SubGroupTest* subGrTest{ nullptr };
 	Test* test{ nullptr };
 	TestLine* tesLine{ nullptr };
-	std::vector<GroupsTests> allTests;
-
+	std::vector<GroupTest> arrTests;
+	
 public:
 	ITests();
-
+	
 	void getAllTests();
 	void setAllTests();
 	void getGroupsTest();
+
+	Test setTest();
+
+	void setGrTest(GroupTest& val);
+
+	std::vector<GroupTest>& getGrTest();
+
+	ITests& getGroupTest();
 
 	~ITests();
 };

@@ -8,26 +8,24 @@ class SubGroupTest
 {
 //public:
 private:
-	int numTest;
-	std::string nameTest;
-	std::string tableNameTest;
-	int countQuestions;
+	int numGrTest;
+	std::string nameGroupTest;
+	std::string tableGroupTest;	
 	std::vector<Test> tests;
 
 public:
 	SubGroupTest();
 
-	void setNumTest(int numTest);
-	void setNameTest(std::string nameTest);
-	void setTableNameTest(std::string tableNameTest);
-	void setCountQuestions(int countQuestions);
 	void setTests(Test& val);
-
-	int getNumTest();
-	std::string getNameTest();
-	std::string getTableNameTest();
-	int getCountQuestions();
 	std::vector<Test>& getTests();
+
+	void setNumGrTest(int numGrTest);
+	void setNameGroupTest(std::string nameGroupTest);
+	void setTableGroupTest(std::string tableGroupTest);
+
+	int getNumGrTest();
+	std::string getNameGroupTest();
+	std::string getTableGroupTest();
 
 	SubGroupTest& getSubGroup();
 

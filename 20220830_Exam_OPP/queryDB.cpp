@@ -82,3 +82,20 @@ bool QueryDB::updateData(std::string tabName, std::string colName, std::string s
         return false;
     return true;
 }
+
+void QueryDB::createGroupsTests(std::string str)
+{
+}
+
+void QueryDB::createGroupTest(std::string str)
+{
+}
+
+void QueryDB::createSubGroupTest(std::string str)
+{
+}
+
+void QueryDB::createTest(std::string str)
+{
+}
+
