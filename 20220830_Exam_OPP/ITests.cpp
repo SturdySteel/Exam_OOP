@@ -75,13 +75,7 @@ void ITests::setAllTests()
 	//grTests = new GroupsTests;
 }
 
-void ITests::getGroupsTest()
-{
-	/*if(grTests != nullptr)
-		std::cout << grTests->getNameGroup() << " " << grTests->getTableName() << "\n";
-	if(allTests.size() != 0)
-		std::cout << allTests[0].getNameGroup() << "\n";*/
-}
+
 
 Test ITests::setTest()
 {	

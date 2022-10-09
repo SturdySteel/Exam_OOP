@@ -62,7 +62,7 @@ void UserExten::testsMenu()
 			system("pause");
 			break;
 		case 1:
-			tst.getGroupsTest();
+			//tst.getGroupsTest();
 			system("pause");
 			break;
 		case 2:

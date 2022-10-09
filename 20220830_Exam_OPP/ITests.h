@@ -26,7 +26,7 @@ public:
 	
 	void getAllTests();
 	void setAllTests();
-	void getGroupsTest();
+	//void getGroupsTest();
 
 	Test setTest();
 
