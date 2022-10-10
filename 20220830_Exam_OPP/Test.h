@@ -16,7 +16,7 @@ class Test
 public:
 	Test();
 
-	void setTestLine(TestLine& line);
+	void setTestLine(TestLine* line);
 	
 	void setNumTest(int numTest);
 	void setNameTest(std::string nameTest);

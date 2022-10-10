@@ -4,7 +4,7 @@ ITests::ITests() :
 	grTest{ new GroupTest },
 	subGrTest{ new SubGroupTest },
 	test{ new Test },
-	tesLine{ new TestLine }
+	testLine{ new TestLine }
 	//allTests{ new std::vector<GroupsTests> }
 {}
 
@@ -16,8 +16,8 @@ ITests::~ITests()
 		delete subGrTest;
 	if (test != nullptr)
 		delete test;
-	if (tesLine != nullptr)
-		delete tesLine;
+	if (testLine != nullptr)
+		delete testLine;
 	/*if (allTests != nullptr)
 		delete allTests;*/
 }
@@ -49,8 +49,6 @@ void ITests::getAllTests()
 	} while (sqlite3_step(stmt) != SQLITE_DONE);
 	
 	sqlite3_finalize(stmt);
-
-	//fout.close();
 	
 }
 
@@ -60,33 +58,85 @@ void ITests::setAllTests()
 	DataEdit* dataEd = DataEdit::getInstance();
 	std::string	query{};
 	std::string str;
-	std::regex rgX{ "(\[A-яа-€A-Za-z]{5,})" };			
-	str = dataEd->inputStr("¬ведите название группы тестов (ru/en): ", rgX, 0);
-	//grTests->setNameGroup(str);
-	rgX= R"(\w{5,})";
-	str = dataEd->inputStr("¬ведите название таблицы группы тестов (en): ", rgX, 1);
-	//grTests->setTableName(str);
-	//grTests->setCountTest(0);
+	std::regex rgX;
+	rgX = "(\[A-яа-€A-Za-z]{5,})";
+	str = dataEd->inputStr("¬ведите название группы тестов: ", rgX, 0);
+	grTest->setNameGroup(str);
+	//rgX= R"(\w{5,})";
+	//str = dataEd->inputStr("¬ведите название таблицы группы тестов (en): ", rgX, 1);
+	 
+	grTest->setTableName(dataEd->translitStr(str));
+	grTest->setCountTest(0);
+	int idGrTest = db->getMaxID(grTest->getTableName(), "idGrTest");
+	if (idGrTest == -1)
+	{
+		//need create table
+	}
+	else
+		grTest->setIdGrTest(idGrTest);
+	
+	rgX = "(\[A-яа-€A-Za-z]{5,})";
+	str = dataEd->inputStr("¬ведите название подгруппы тестов: ", rgX, 0);
+	subGrTest->setNameGroupTest(str);
+	subGrTest->setTableGroupTest(dataEd->translitStr(str));
+	int numGrTest = db->getMaxID(subGrTest->getTableGroupTest(), "numGrTest");
+	if (numGrTest == -1)
+	{
+		//need create table
+	}
+	else
+		subGrTest->setNumGrTest(numGrTest);
 
-	//grTest->setNameGroupTest();
+	rgX = "(\[A-яа-€A-Za-z]{5,})";
+	str = dataEd->inputStr("¬ведите название теста: ", rgX, 0);
+	test->setNameTest(str);	
+	int numTest = db->getMaxID(test->getTableNameTest(), "numTest");
+	if (numTest == -1)
+	{
+		//need create table
+	}
+	else
+		test->setNumTest(numTest);
+	test->setTableNameTest(dataEd->translitStr(str)+std::to_string(numTest));
+	rgX = R"(\d{1,})";
+	int countQuestions = std::stoi(dataEd->inputStr("¬ведите колличество вопросов теста: ", rgX, 0));
+	test->setCountQuestions(countQuestions);
+	
+	for (size_t i{}; i < countQuestions; ++i)
+	{
+		test->setTestLine(setTest(i));
+		system("cls");
+	}
 
-
-	//allTests.push_back(*grTests);
+	arrTests.push_back(*grTest);
 	//grTests = new GroupsTests;
 }
 
-
-
-Test ITests::setTest()
+TestLine* ITests::setTest(int i)
 {	
-	QueryDB* db = QueryDB::getInstance();
-	DataEdit* dataEd = DataEdit::getInstance();
-	std::string	query{};
-	std::string str;
-	std::regex rgX{ R"(\w{5,})" };
-	str = dataEd->inputStr("¬ведите название таблицы теста (en): ", rgX, 0);
-	//query = "SELECT tableNameTest FROM ";
-	return Test();
+	//QueryDB* db = QueryDB::getInstance();
+	//std::string	query{};
+	TestLine* tL{new TestLine};
+	DataEdit* dataEd = DataEdit::getInstance();	
+	std::string str;	
+	std::regex rgX; // { R"(\w{5,})" };	
+	testLine->setNumQ(i);
+	//rgX = "(\[A-яа-€A-Za-z0-9]{5,})";
+	rgX = "(\[A-яа-€A-Za-z0-9]{5,})";
+	str = dataEd->inputStr("¬ведите вопрос " + std::to_string(i+1) + " теста : ", rgX, 0);
+	tL->setQuestion(str);
+	str = dataEd->inputStr("¬ведите ответ 1: ", rgX, 1);
+	tL->setAnswer01(str);
+	str = dataEd->inputStr("¬ведите ответ 2: ", rgX, 2);
+	tL->setAnswer02(str);
+	str = dataEd->inputStr("¬ведите ответ 3: ", rgX, 3);
+	tL->setAnswer03(str);
+	str = dataEd->inputStr("¬ведите ответ 4: ", rgX, 4);
+	tL->setAnswer04(str);
+	rgX = R"(\d{1})";
+	tL->setRightAnswer(std::stoi(dataEd->inputStr("¬ведите правильный ответ: ", rgX, 5)));
+
+	return tL;
 }
 
 void ITests::setGrTest(GroupTest& val) {
@@ -97,7 +147,22 @@ std::vector<GroupTest>& ITests::getGrTest() {
 	return this->arrTests;
 }
 
-ITests& ITests::getGroupTest() {
+ITests& ITests::getGroupTest() 
+{	
+	std::cout << "idGrTest = " << this->grTest->getIdGrTest();// << "\n";
+	std::cout << "nameGroup = " << this->grTest->getNameGroup();// << "\n";
+	std::cout << "countTest = " << this->grTest->getCountTest();// << "\n";
+	std::cout << "tableName = " << this->grTest->getTableName() << "\n";
+
+	std::cout << "numGrTest = " << this->subGrTest->getNumGrTest();
+	std::cout << "nameGroupTest = " << this->subGrTest->getNameGroupTest();
+	std::cout << "tableGroupTest = " << this->subGrTest->getTableGroupTest() << "\n";
+
+	std::cout << "numTest = " << this->test->getNumTest();
+	std::cout << "nameTest = " << this->test->getNameTest();
+	std::cout << "tableNameTest = " << this->test->getTableNameTest();
+	std::cout << "countQuestions = " << this->test->getCountQuestions() << "\n";
+ 
 	return *this;
 }
 

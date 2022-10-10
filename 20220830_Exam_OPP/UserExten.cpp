@@ -37,6 +37,7 @@ void UserExten::usersMenu()
 		case 2:
 			if ((*menuArr[1]).size() == 3)
 				return;
+
 			break;
 		case 3:
 			return;
@@ -62,12 +63,13 @@ void UserExten::testsMenu()
 			system("pause");
 			break;
 		case 1:
-			//tst.getGroupsTest();
+			tst.getGroupTest();
 			system("pause");
 			break;
 		case 2:
 			if ((*menuArr[2]).size() == 3)
 				return;
+
 			tst.setAllTests();
 			system("pause");
 			//addTest();

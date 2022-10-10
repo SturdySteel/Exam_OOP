@@ -5,6 +5,7 @@
 #include "sqlite3/sqlite3.h"
 #include <string>
 #include <cstring>
+#include "querryString.h"
 //#include "UserLogin.h"
 //#include "UserData.h"
 
@@ -23,10 +24,11 @@ public:
     sqlite3_stmt* selectSQL(const std::string& query);
     int getIdByLogin(std::string login);
     //int getPrKeyByTabName(std::string tabName, std::string colName);
-
+    int getMaxID(std::string tabName, std::string num);
 
     bool updateData(std::string tabName, std::string colName, 
         std::string sel, int id, auto& val);
+
 
     void createGroupsTests(std::string str);
     void createGroupTest(std::string str);
@@ -34,6 +36,9 @@ public:
     void createTest(std::string str);
     
 };
+
+#endif // !QUERYDB_H
+
 //"INSERT INTO USERS(login,password,superuser) VALUES ('" + login 
 //    + "','" + pass +"','" + std::to_string(su) + "');";
 //
@@ -46,4 +51,3 @@ public:
 //     + std::to_string(UserLogin::id) + "','" + std::to_string(inn) + "','" + name + "','" + surname + "','"
 //     + birthday +"','" + registerDate + "','" + std::to_string(phone) + "');";
 //
-#endif // !QUERYDB_H

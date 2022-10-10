@@ -49,6 +49,8 @@ sqlite3_stmt* QueryDB::selectSQL(const std::string& query) {
     if (rc)
     {
         std::cerr << "Can't open database" << sqlite3_errmsg(db);
+        std::cout << "\nrc = " << rc << std::endl;
+        system("pause");
         return nullptr;
     }
     sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, 0);
@@ -60,6 +62,14 @@ sqlite3_stmt* QueryDB::selectSQL(const std::string& query) {
 int QueryDB::getIdByLogin(std::string login) {
     sqlite3_stmt* stmt{ nullptr };
     std::string query = "SELECT id FROM users WHERE login ='" + login + "';";
+    stmt = selectSQL(query);
+    return stmt == nullptr ? -1 : sqlite3_column_int(stmt, 0);
+}
+
+int QueryDB::getMaxID(std::string tabName, std::string num)
+{
+    sqlite3_stmt* stmt{ nullptr };
+    std::string query = "SELECT MAX(" + num + ") FROM " + tabName + ";";
     stmt = selectSQL(query);
     return sqlite3_column_int(stmt, 0);
 }

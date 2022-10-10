@@ -8,7 +8,7 @@ Test::Test() :
 	//arrTest{ new std::vector<TestLine> }
 {}
 
-void Test::setTestLine(TestLine& line) { this->arrTest.push_back(line); }
+void Test::setTestLine(TestLine* line) { this->arrTest.push_back(*line); delete line; }
 
 void Test::setNumTest(int numTest) { this->numTest = numTest; }
 

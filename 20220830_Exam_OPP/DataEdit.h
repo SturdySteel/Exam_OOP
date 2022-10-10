@@ -17,12 +17,14 @@ class DataEdit
 private:
 	static DataEdit* instance;
 	DataEdit() {}
+	std::string translitChar(const char ch);
 
 public:
 	static DataEdit* getInstance();
 	bool create();
 	std::string inputStr(std::string&& text, std::regex rgX, int y, bool sw = true);
 	void cp866_cp1251(std::string& s);
+	std::string translitStr(const std::string& str);
 
 	//bool edit(auto& obj);	
 
