@@ -30,13 +30,27 @@ public:
 
     bool updateData(std::string tabName, std::string colName, 
         std::string sel, int id, auto& val);
-
-
-    void createGroupsTests(std::string str);
-    void createGroupTest(std::string str);
-    void createSubGroupTest(std::string str);
-    void createTest(std::string str);
     
+    //void createUsersTable();
+    //void createUserDataTable();
+    //void createTestPassedTable();
+    //void createTableGroupsTests();
+        
+    bool createGroupTest(std::string str);
+    bool createSubGroupTest(std::string str);
+    bool createTest(std::string str);
+    
+    void insertTableGroupsTest(std::string& nameGroup, int& countTest, std::string& tableName);
+
+    void insertTableGroupTest(std::string& tableName, std::string& nameGroupTest, 
+        std::string& tableGroupTest);
+
+    void insertTableSubGroupTest(std::string& tableGroupTest, std::string& nameTest, 
+        std::string& tableNameTest, int& countQuestions);
+    
+    void insertTableTests(std::string& tableNameTest, std::string& question, 
+        std::string& answer01, std::string& answer02, std::string& answer03, 
+        std::string& answer04, int& rightAnswer);
 };
 
 #endif // !QUERYDB_H
@@ -52,4 +66,3 @@ public:
 //"INSERT INTO USERDATA(users_id,inn,name,surname,birthday,registerDate,phone) VALUES ('"
 //     + std::to_string(UserLogin::id) + "','" + std::to_string(inn) + "','" + name + "','" + surname + "','"
 //     + birthday +"','" + registerDate + "','" + std::to_string(phone) + "');";
-//

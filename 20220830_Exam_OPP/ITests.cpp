@@ -1,26 +1,26 @@
 #include "ITests.h"
 
-ITests::ITests() :	
-	grTest{ new GroupTest },
-	subGrTest{ new SubGroupTest },
-	test{ new Test }
-	//testLine{ new TestLine }
-	//allTests{ new std::vector<GroupsTests> }
-{}
+//ITests::ITests() :	
+//	grTest{ new GroupTest },
+//	subGrTest{ new SubGroupTest },
+//	test{ new Test }
+//	//testLine{ new TestLine }
+//	//allTests{ new std::vector<GroupsTests> }
+//{}
 
-ITests::~ITests()
-{
-	if (grTest != nullptr)
-		delete grTest;
-	if (subGrTest != nullptr)
-		delete subGrTest;
-	if (test != nullptr)
-		delete test;
-	/*if (testLine != nullptr)
-		delete testLine;*/
-	/*if (allTests != nullptr)
-		delete allTests;*/
-}
+//ITests::~ITests()
+//{
+//	if (grTest != nullptr)
+//		delete grTest;
+//	if (subGrTest != nullptr)
+//		delete subGrTest;
+//	if (test != nullptr)
+//		delete test;
+//	/*if (testLine != nullptr)
+//		delete testLine;*/
+//	/*if (allTests != nullptr)
+//		delete allTests;*/
+//}
 
 
 void ITests::getAllTests()
@@ -62,6 +62,7 @@ void ITests::setAllTests()
 	std::regex rgX;
 	
 	//Group
+	GroupTest* grTest{ new GroupTest };
 	rgX = "(\[A-яа-€A-Za-z]{5,})";
 	str = dataEd->inputStr("¬ведите название группы тестов: ", rgX, 0);
 	std::transform(str.begin(), str.end(), str.begin(), [](char c) { return std::tolower(c); });
@@ -80,6 +81,7 @@ void ITests::setAllTests()
 	++j;
 
 	//SubGroup
+	SubGroupTest* subGrTest{ new SubGroupTest };
 	rgX = "(\[A-яа-€A-Za-z]{5,})";
 	str = dataEd->inputStr("¬ведите название подгруппы тестов: ", rgX, 0);
 	std::transform(str.begin(), str.end(), str.begin(), [](char c) { return std::tolower(c); });
@@ -96,8 +98,9 @@ void ITests::setAllTests()
 	arrTests[j].getSubGrTest().push_back(*subGrTest);
 	++k;
 
-	//Test	
-	rgX = "(\[A-яа-€A-Za-z0-9]{5,})";
+	//Test
+	Test* test{ new Test };
+	rgX = "(\[A-яа-€A-Za-z0-9]{4,})";
 	str = dataEd->inputStr("¬ведите название теста: ", rgX, 0);
 	std::transform(str.begin(), str.end(), str.begin(), [](char c) { return std::tolower(c); });
 	test->setNameTest(str);
@@ -121,7 +124,9 @@ void ITests::setAllTests()
 
 	arrTests[j].getSubGrTest().at(k).getTests().push_back(*test);
 
-	//grTests = new GroupsTests;
+	delete grTest;
+	delete subGrTest;
+	delete test;
 }
 
 TestLine* ITests::setTest(int i)
@@ -152,15 +157,35 @@ TestLine* ITests::setTest(int i)
 
 void ITests::insertTestToDB(GroupTest* grTest)
 {
+	QueryDB* db = QueryDB::getInstance();
+	std::string	select;
+	for (auto i : arrTests)
+	{
+		db->createGroupTest(i.getTableName());
+		for (auto j : i.getSubGrTest())
+		{
+			db->createSubGroupTest(j.getTableGroupTest());
+			for (auto k : j.getTests())
+			{
+				db->createTest(k.getTableNameTest());
+				for (auto l : k.getArrTest())
+				{
 
+				}
+			}
+
+		}
+	}
 
 }
 
-void ITests::setGrTest(GroupTest& val) {
-	this->arrTests.push_back(val);
-}
+//void ITests::setGrTest(GroupTest& val) 
+//{
+//	this->arrTests.push_back(val);
+//}
 
-std::vector<GroupTest>& ITests::getGrTest() {
+std::vector<GroupTest>& ITests::getGrTest() 
+{
 	return this->arrTests;
 }
 
@@ -168,7 +193,7 @@ ITests& ITests::getGroupTest()
 {	
 	for (auto i : arrTests)
 	{
-		std::cout << "idGrTest = " << i.getIdGrTest() <<  " ";
+		std::cout << "idGrTest = " << i.getIdGrTest() << " ";
 		std::cout << "nameGroup = " << i.getNameGroup() << " ";
 		std::cout << "countTest = " << i.getCountTest() << " ";
 		std::cout << "tableName = " << i.getTableName() << "\n";

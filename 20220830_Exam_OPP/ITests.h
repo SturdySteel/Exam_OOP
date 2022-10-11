@@ -15,9 +15,9 @@
 class ITests
 {
 private:	
-	GroupTest* grTest{ nullptr };
+	/*GroupTest* grTest{ nullptr };
 	SubGroupTest* subGrTest{ nullptr };
-	Test* test{ nullptr };
+	Test* test{ nullptr };*/
 	//TestLine* testLine{ nullptr };
 	std::vector<GroupTest> arrTests;
 
@@ -25,20 +25,20 @@ private:
 	TestLine* setTest(int i);
 	
 public:
-	ITests();
+	//ITests();
 	
 	void getAllTests();
 	void setAllTests();
 	//void getGroupsTest();
 	void insertTestToDB(GroupTest* grTest);
 
-	void setGrTest(GroupTest& val);
+	//void setGrTest(GroupTest& val);
 
 	std::vector<GroupTest>& getGrTest();
 
 	ITests& getGroupTest();
 
-	~ITests();
+	//~ITests();
 };
 
 #endif // !ITESTS_H

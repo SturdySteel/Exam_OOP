@@ -4,6 +4,27 @@
 
 #endif // !QUERRYSTRING_H
 
+
+//CREATE TABLE users(
+//	id INTEGER PRIMARY KEY ASC AUTOINCREMENT NOT NULL, 
+//	login Text NOT NULL, 
+//	password Text, 
+//	superuser Boolean NOT NULL, 
+//	CONSTRAINT unique_id UNIQUE(id), 
+//	CONSTRAINT unique_login UNIQUE(login))
+
+//CREATE TABLE userData(
+//	users_id Integer NOT NULL, 
+//	inn TEXT NOT NULL PRIMARY KEY, 
+//	name Text, 
+//	surname Text, 
+//	birthday Date, 
+//	registerDate Date, 
+//	phone TEXT NOT NULL, 
+//	CONSTRAINT lnk_users_userData FOREIGN KEY(users_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE, 
+//	CONSTRAINT unique_phone UNIQUE(phone), CONSTRAINT unique_inn UNIQUE(inn), 
+//	CONSTRAINT unique_users_id UNIQUE(users_id))
+
 //CREATE TABLE testPassed(
 //	num Integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
 //	users_id Integer NOT NULL, 
