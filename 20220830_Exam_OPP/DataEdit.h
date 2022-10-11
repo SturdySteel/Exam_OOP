@@ -16,6 +16,8 @@ class DataEdit
 {
 private:
 	static DataEdit* instance;
+
+private:
 	DataEdit() {}
 	std::string translitChar(const char ch);
 

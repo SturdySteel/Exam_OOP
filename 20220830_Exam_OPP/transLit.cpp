@@ -80,7 +80,10 @@ std::string DataEdit::translitStr(const std::string& str)
     std::string ts{};
     for (size_t i{}; i < str.length(); ++i)
     {
-        ts += translitChar(str[i]);
+        if ((str[i] >= 48 && str[i] <= 57) || (str[i] >= 65 && str[i] <= 90) || (str[i] >= 97 && str[i] <= 122))       
+            ts += str[i];
+        else 
+            ts += translitChar(str[i]);
     }
     return ts;
 }

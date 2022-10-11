@@ -28,6 +28,11 @@ int Test::getCountQuestions() {	return this->countQuestions; }
 
 Test& Test::getTest() { return *this; }
 
+std::vector<TestLine>& Test::getArrTest()
+{
+	{ return this->arrTest; }
+}
+
 //Test::~Test() {
 //	if (arrTest != nullptr) {
 //		this->arrTest->clear();

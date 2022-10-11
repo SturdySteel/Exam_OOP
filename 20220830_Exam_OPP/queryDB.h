@@ -15,6 +15,8 @@ class QueryDB
 private:
     static QueryDB* instance;
     std::string dbName { "db/testsystem.db" };
+
+private:
     QueryDB() {}
     int callback(void* NotUsed, int argc, char** argv, char** azColName);
 

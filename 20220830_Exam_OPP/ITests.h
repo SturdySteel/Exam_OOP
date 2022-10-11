@@ -18,8 +18,11 @@ private:
 	GroupTest* grTest{ nullptr };
 	SubGroupTest* subGrTest{ nullptr };
 	Test* test{ nullptr };
-	TestLine* testLine{ nullptr };
+	//TestLine* testLine{ nullptr };
 	std::vector<GroupTest> arrTests;
+
+private:
+	TestLine* setTest(int i);
 	
 public:
 	ITests();
@@ -27,8 +30,7 @@ public:
 	void getAllTests();
 	void setAllTests();
 	//void getGroupsTest();
-
-	TestLine* setTest(int i);
+	void insertTestToDB(GroupTest* grTest);
 
 	void setGrTest(GroupTest& val);
 

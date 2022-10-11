@@ -3,8 +3,8 @@
 ITests::ITests() :	
 	grTest{ new GroupTest },
 	subGrTest{ new SubGroupTest },
-	test{ new Test },
-	testLine{ new TestLine }
+	test{ new Test }
+	//testLine{ new TestLine }
 	//allTests{ new std::vector<GroupsTests> }
 {}
 
@@ -16,8 +16,8 @@ ITests::~ITests()
 		delete subGrTest;
 	if (test != nullptr)
 		delete test;
-	if (testLine != nullptr)
-		delete testLine;
+	/*if (testLine != nullptr)
+		delete testLine;*/
 	/*if (allTests != nullptr)
 		delete allTests;*/
 }
@@ -56,15 +56,16 @@ void ITests::setAllTests()
 {
 	QueryDB* db = QueryDB::getInstance();
 	DataEdit* dataEd = DataEdit::getInstance();
+	int j{-1},k{-1};
 	std::string	query{};
 	std::string str;
 	std::regex rgX;
+	
+	//Group
 	rgX = "(\[A-Яа-яA-Za-z]{5,})";
 	str = dataEd->inputStr("Введите название группы тестов: ", rgX, 0);
-	grTest->setNameGroup(str);
-	//rgX= R"(\w{5,})";
-	//str = dataEd->inputStr("Введите название таблицы группы тестов (en): ", rgX, 1);
-	 
+	std::transform(str.begin(), str.end(), str.begin(), [](char c) { return std::tolower(c); });
+	grTest->setNameGroup(str);		 
 	grTest->setTableName(dataEd->translitStr(str));
 	grTest->setCountTest(0);
 	int idGrTest = db->getMaxID(grTest->getTableName(), "idGrTest");
@@ -74,9 +75,14 @@ void ITests::setAllTests()
 	}
 	else
 		grTest->setIdGrTest(idGrTest);
-	
+
+	arrTests.push_back(*grTest);
+	++j;
+
+	//SubGroup
 	rgX = "(\[A-Яа-яA-Za-z]{5,})";
 	str = dataEd->inputStr("Введите название подгруппы тестов: ", rgX, 0);
+	std::transform(str.begin(), str.end(), str.begin(), [](char c) { return std::tolower(c); });
 	subGrTest->setNameGroupTest(str);
 	subGrTest->setTableGroupTest(dataEd->translitStr(str));
 	int numGrTest = db->getMaxID(subGrTest->getTableGroupTest(), "numGrTest");
@@ -87,9 +93,14 @@ void ITests::setAllTests()
 	else
 		subGrTest->setNumGrTest(numGrTest);
 
-	rgX = "(\[A-Яа-яA-Za-z]{5,})";
+	arrTests[j].getSubGrTest().push_back(*subGrTest);
+	++k;
+
+	//Test	
+	rgX = "(\[A-Яа-яA-Za-z0-9]{5,})";
 	str = dataEd->inputStr("Введите название теста: ", rgX, 0);
-	test->setNameTest(str);	
+	std::transform(str.begin(), str.end(), str.begin(), [](char c) { return std::tolower(c); });
+	test->setNameTest(str);
 	int numTest = db->getMaxID(test->getTableNameTest(), "numTest");
 	if (numTest == -1)
 	{
@@ -97,7 +108,7 @@ void ITests::setAllTests()
 	}
 	else
 		test->setNumTest(numTest);
-	test->setTableNameTest(dataEd->translitStr(str)+std::to_string(numTest));
+	test->setTableNameTest(dataEd->translitStr(str) + std::to_string(numTest));
 	rgX = R"(\d{1,})";
 	int countQuestions = std::stoi(dataEd->inputStr("Введите колличество вопросов теста: ", rgX, 0));
 	test->setCountQuestions(countQuestions);
@@ -108,7 +119,8 @@ void ITests::setAllTests()
 		system("cls");
 	}
 
-	arrTests.push_back(*grTest);
+	arrTests[j].getSubGrTest().at(k).getTests().push_back(*test);
+
 	//grTests = new GroupsTests;
 }
 
@@ -116,12 +128,11 @@ TestLine* ITests::setTest(int i)
 {	
 	//QueryDB* db = QueryDB::getInstance();
 	//std::string	query{};
-	TestLine* tL{new TestLine};
+	TestLine* tL{ new TestLine };
 	DataEdit* dataEd = DataEdit::getInstance();	
 	std::string str;	
 	std::regex rgX; // { R"(\w{5,})" };	
-	testLine->setNumQ(i);
-	//rgX = "(\[A-Яа-яA-Za-z0-9]{5,})";
+	tL->setNumQ(i);	
 	rgX = "(\[A-Яа-яA-Za-z0-9]{5,})";
 	str = dataEd->inputStr("Введите вопрос " + std::to_string(i+1) + " теста : ", rgX, 0);
 	tL->setQuestion(str);
@@ -139,6 +150,12 @@ TestLine* ITests::setTest(int i)
 	return tL;
 }
 
+void ITests::insertTestToDB(GroupTest* grTest)
+{
+
+
+}
+
 void ITests::setGrTest(GroupTest& val) {
 	this->arrTests.push_back(val);
 }
@@ -149,19 +166,34 @@ std::vector<GroupTest>& ITests::getGrTest() {
 
 ITests& ITests::getGroupTest() 
 {	
-	std::cout << "idGrTest = " << this->grTest->getIdGrTest();// << "\n";
-	std::cout << "nameGroup = " << this->grTest->getNameGroup();// << "\n";
-	std::cout << "countTest = " << this->grTest->getCountTest();// << "\n";
-	std::cout << "tableName = " << this->grTest->getTableName() << "\n";
-
-	std::cout << "numGrTest = " << this->subGrTest->getNumGrTest();
-	std::cout << "nameGroupTest = " << this->subGrTest->getNameGroupTest();
-	std::cout << "tableGroupTest = " << this->subGrTest->getTableGroupTest() << "\n";
-
-	std::cout << "numTest = " << this->test->getNumTest();
-	std::cout << "nameTest = " << this->test->getNameTest();
-	std::cout << "tableNameTest = " << this->test->getTableNameTest();
-	std::cout << "countQuestions = " << this->test->getCountQuestions() << "\n";
+	for (auto i : arrTests)
+	{
+		std::cout << "idGrTest = " << i.getIdGrTest() <<  " ";
+		std::cout << "nameGroup = " << i.getNameGroup() << " ";
+		std::cout << "countTest = " << i.getCountTest() << " ";
+		std::cout << "tableName = " << i.getTableName() << "\n";
+		for (auto j : i.getSubGrTest())
+		{
+			std::cout << "numGrTest = " << j.getNumGrTest() << " ";			
+			std::cout << "nameGroupTest = " << j.getNameGroupTest() << " ";
+			std::cout << "tableGroupTest = " << j.getTableGroupTest() << "\n";
+			for (auto k : j.getTests())
+			{
+				std::cout << "numTest = " << k.getNumTest() << " ";
+				std::cout << "nameTest = " << k.getNameTest() << " ";
+				std::cout << "tableNameTest = " << k.getTableNameTest() << " ";
+				std::cout << "countQuestions = " << k.getCountQuestions() << "\n";
+				for (auto l : k.getArrTest())
+				{
+					std::cout << "\n" << "Название теста: " << k.getNameTest() << std::endl;
+					std::cout << l.getNumQ() << "." << l.getQuestion() << ":";
+					std::cout << "\nВарианты:\n1: " << l.getAnswer01() << "\n2: "
+						<< l.getAnswer02() << "\n3: " << l.getAnswer03()
+						<< "\n4: " << l.getAnswer04() << "\n" << "Right: " << l.getRightAnswer() << std::endl;
+				}
+			}
+		}
+	}
  
 	return *this;
 }

@@ -30,7 +30,7 @@ public:
 	int getCountQuestions();
 
 	Test& getTest();
-
+	std::vector<TestLine>& getArrTest();
 	//~Test();
 };
 
