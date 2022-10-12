@@ -8,7 +8,8 @@ Test::Test() :
 	//arrTest{ new std::vector<TestLine> }
 {}
 
-void Test::setTestLine(TestLine* line) { this->arrTest.push_back(*line); delete line; }
+void Test::setTestLine(TestLine* line) { this->arrTestLines.push_back(*line); delete line; }
+
 
 void Test::setNumTest(int numTest) { this->numTest = numTest; }
 
@@ -18,6 +19,7 @@ void Test::setTableNameTest(std::string tableNameTest) { this->tableNameTest = t
 
 void Test::setCountQuestions(int countQuestions) { this->countQuestions = countQuestions; }
 
+
 int Test::getNumTest() { return this->numTest; }
 
 std::string Test::getNameTest() { return this->nameTest; }
@@ -26,11 +28,12 @@ std::string Test::getTableNameTest() { return this->tableNameTest; }
 
 int Test::getCountQuestions() {	return this->countQuestions; }
 
+
 Test& Test::getTest() { return *this; }
 
-std::vector<TestLine>& Test::getArrTest()
+std::vector<TestLine>& Test::getArrTestLines()
 {
-	{ return this->arrTest; }
+	 return this->arrTestLines;
 }
 
 //Test::~Test() {

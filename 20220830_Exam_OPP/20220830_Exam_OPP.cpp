@@ -66,7 +66,8 @@ int main()
     UserLogin usr;
     AdminExten adm{ admMenuArr };
     UserExten user{ userMenuArr };
-   
+       
+    //system("pause");
     //DEBUG. comment for run normaly 
     adm.menu();
     exit(0);

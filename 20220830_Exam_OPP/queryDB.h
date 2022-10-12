@@ -38,21 +38,23 @@ public:
     //void createTestPassedTable();
     //void createTableGroupsTests();
         
-    bool createGroupTest(std::string str);
+    void createGroupTest(std::string str);
     bool createSubGroupTest(std::string str);
     bool createTest(std::string str);
     
-    void insertTableGroupsTest(std::string& nameGroup, int& countTest, std::string& tableName);
+    void insertTableGroupsTest(const std::string& nameGroup, const int& countTest, 
+        const std::string& tableName);
 
-    void insertTableGroupTest(std::string& tableName, std::string& nameGroupTest, 
-        std::string& tableGroupTest);
+    void insertTableGroupTest(const std::string& tableName, const std::string& nameGroupTest, 
+        const std::string& tableGroupTest);
 
-    void insertTableSubGroupTest(std::string& tableGroupTest, std::string& nameTest, 
-        std::string& tableNameTest, int& countQuestions);
+    void insertTableSubGroupTest(const std::string& tableGroupTest, const std::string& nameTest, 
+        const std::string& tableNameTest, const int& countQuestions);
     
-    void insertTableTests(std::string& tableNameTest, std::string& question, 
-        std::string& answer01, std::string& answer02, std::string& answer03, 
-        std::string& answer04, int& rightAnswer);
+    void insertTableTests(const std::string& tableNameTest, const std::string& question, 
+        const std::string& answer01, const std::string& answer02, 
+        const std::string& answer03, const std::string& answer04, 
+        const int& rightAnswer);
 };
 
 #endif // !QUERYDB_H

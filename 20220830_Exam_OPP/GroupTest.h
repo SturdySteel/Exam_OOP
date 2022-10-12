@@ -12,7 +12,7 @@ private:
 	std::string nameGroup;
 	int countTest;
 	std::string tableName;	
-	std::vector<SubGroupTest> subGrTest;
+	std::vector<SubGroupTest> arrSubGrTest;
 
 public:
 	GroupTest();
@@ -27,7 +27,7 @@ public:
 	std::string getNameGroup();
 	std::string getTableName();
 	int getCountTest();	
-	std::vector<SubGroupTest>& getSubGrTest();
+	std::vector<SubGroupTest>& getArrSubGrTest();
 
 	GroupTest& getGroupTest();
 

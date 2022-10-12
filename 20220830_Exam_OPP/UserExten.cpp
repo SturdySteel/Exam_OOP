@@ -56,14 +56,14 @@ void UserExten::testsMenu()
 		int c = Menu::select_vertical(*menuArr[2], HorizontalAlignment::Left, 0);
 		switch (c)
 		{
-		case 0:
-			//listTest();			
+		case 0:					
 			tst.getAllTests();
 			
 			system("pause");
 			break;
 		case 1:
 			tst.getGroupTest();
+
 			system("pause");
 			break;
 		case 2:
@@ -71,8 +71,8 @@ void UserExten::testsMenu()
 				return;
 
 			tst.setAllTests();
-			system("pause");
-			//addTest();
+
+			system("pause");			
 			break;
 		case 3:
 			return;

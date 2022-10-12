@@ -11,7 +11,7 @@ class Test
 	std::string nameTest;
 	std::string tableNameTest;
 	int countQuestions;	
-	std::vector<TestLine> arrTest;
+	std::vector<TestLine> arrTestLines;
 	
 public:
 	Test();
@@ -30,7 +30,7 @@ public:
 	int getCountQuestions();
 
 	Test& getTest();
-	std::vector<TestLine>& getArrTest();
+	std::vector<TestLine>& getArrTestLines();
 	//~Test();
 };
 

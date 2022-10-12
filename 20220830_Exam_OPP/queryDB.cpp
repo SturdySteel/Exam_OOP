@@ -102,7 +102,7 @@ int QueryDB::checkExistTable(std::string tabName)
     return sqlite3_column_int(stmt, 0);    
 }
 
-bool QueryDB::createGroupTest(std::string str)
+void QueryDB::createGroupTest(std::string str)
 {
     std::string query = "CREATE TABLE IF NOT EXISTS " + str + 
         " (numGrTest Integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
@@ -111,9 +111,9 @@ bool QueryDB::createGroupTest(std::string str)
         "CONSTRAINT unique_numGrTest UNIQUE(numGrTest)," +
         "CONSTRAINT unique_tableGroupTest UNIQUE(tableGroupTest));";
     int rc = querySQL(query);
-    if (rc != 1)
+    /*if (rc != 1)
         return false;
-    return true;
+    return true;*/
 }
 
 bool QueryDB::createSubGroupTest(std::string str)
@@ -142,29 +142,31 @@ bool QueryDB::createTest(std::string str)
     return true;
 }
 
-void QueryDB::insertTableGroupsTest(std::string& nameGroup, int& countTest, std::string& tableName)
+void QueryDB::insertTableGroupsTest(const std::string& nameGroup, const int& countTest, 
+    const std::string& tableName)
 {
     std::string query = "INSERT INTO tableGroupsTests(nameGroup, countTest, tableName) VALUES('"+ 
         nameGroup + "', '" + std::to_string(countTest) + "', '" + tableName + "');";
 }
 
-void QueryDB::insertTableGroupTest(std::string& tableName, 
-    std::string& nameGroupTest, std::string& tableGroupTest)
+void QueryDB::insertTableGroupTest(const std::string& tableName, 
+    const std::string& nameGroupTest, const std::string& tableGroupTest)
 {
     std::string query = "INSERT INTO " + tableName  + " (nameGroupTest, tableGroupTest) VALUES('" +
         nameGroupTest + "', '" + tableGroupTest + "');";
 }
 
-void QueryDB::insertTableSubGroupTest(std::string& tableGroupTest, 
-    std::string& nameTest, std::string& tableNameTest, int& countQuestions)
+void QueryDB::insertTableSubGroupTest(const std::string& tableGroupTest, 
+    const std::string& nameTest, const std::string& tableNameTest, const int& countQuestions)
 {
     std::string query = "INSERT INTO " + tableGroupTest + " (nameTest, tableNameTest, countQuestions) VALUES('" +
         nameTest + "', '" + tableNameTest + "', '" + std::to_string(countQuestions) + "');";
 }
 
-void QueryDB::insertTableTests(std::string& tableNameTest, std::string& question, 
-    std::string& answer01, std::string& answer02, std::string& answer03, 
-    std::string& answer04, int& rightAnswer)
+void QueryDB::insertTableTests(const std::string& tableNameTest, const std::string& question, 
+    const std::string& answer01, const std::string& answer02, 
+    const std::string& answer03, const std::string& answer04, 
+    const int& rightAnswer)
 {
     std::string query = "INSERT INTO " + tableNameTest + " (question, answer01, answer02," +
         " answer03, answer04, rightAnswer) VALUES('" + question + "', '" + answer01 + 

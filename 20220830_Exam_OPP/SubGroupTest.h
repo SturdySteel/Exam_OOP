@@ -6,19 +6,17 @@
 
 class SubGroupTest
 {
-//public:
 private:
 	int numGrTest;
 	std::string nameGroupTest;
 	std::string tableGroupTest;	
-	std::vector<Test> tests;
+	std::vector<Test> arrTests;
 
 public:
 	SubGroupTest();
 
 	void setTests(Test& val);
-	std::vector<Test>& getTests();
-
+	
 	void setNumGrTest(int numGrTest);
 	void setNameGroupTest(std::string nameGroupTest);
 	void setTableGroupTest(std::string tableGroupTest);
@@ -26,8 +24,9 @@ public:
 	int getNumGrTest();
 	std::string getNameGroupTest();
 	std::string getTableGroupTest();
+	std::vector<Test>& getArrTests();
 
-	SubGroupTest& getSubGroup();
+	SubGroupTest& getSubGrArr();
 
 	//~SubGroupTest();
 };

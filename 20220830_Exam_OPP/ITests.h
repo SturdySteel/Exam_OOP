@@ -20,14 +20,15 @@ private:
 	Test* test{ nullptr };*/
 	//TestLine* testLine{ nullptr };
 	std::vector<GroupTest> arrTests;
+	static int counter;
 
 private:
 	TestLine* setTest(int i);
-	void setIgrTest(GroupTest*& grTest, std::string str);
-	void setIsubGrTest(SubGroupTest*& grTest, std::string str, auto& sGj);
+	//void setIgrTest(GroupTest*& grTest, std::string str);
+	//void setIsubGrTest(SubGroupTest*& grTest, std::string str, auto& sGj);
 
 public:
-	//ITests();
+	ITests();
 	
 	void getAllTests();
 	void setAllTests();
