@@ -66,12 +66,16 @@ int QueryDB::getIdByLogin(std::string login) {
     return stmt == nullptr ? -1 : sqlite3_column_int(stmt, 0);
 }
 
-int QueryDB::getMaxID(std::string tabName, std::string num)
+int QueryDB::getMaxID(std::string tabName, std::string id)
 {
     sqlite3_stmt* stmt{ nullptr };
-    std::string query = "SELECT MAX(" + num + ") FROM " + tabName + ";";
-    stmt = selectSQL(query);
-    return sqlite3_column_int(stmt, 0);
+    std::string query = "SELECT MAX(" + id + ") FROM " + tabName + ";";
+    if(checkExistTable(tabName))
+    {
+        stmt = selectSQL(query);
+        return sqlite3_column_int(stmt, 0);
+    }
+    return -1;
 }
 
 //int QueryDB::getPrKeyByTabName(std::string tabName, std::string colName)
@@ -89,6 +93,13 @@ bool QueryDB::updateData(std::string tabName, std::string colName, std::string s
     if (rc != 1)
         return false;
     return true;
+}
+
+int QueryDB::checkExistTable(std::string tabName)
+{
+    sqlite3_stmt* stmt{ nullptr };
+    stmt = selectSQL("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" + tabName + "';");
+    return sqlite3_column_int(stmt, 0);    
 }
 
 bool QueryDB::createGroupTest(std::string str)

@@ -26,11 +26,13 @@ public:
     sqlite3_stmt* selectSQL(const std::string& query);
     int getIdByLogin(std::string login);
     //int getPrKeyByTabName(std::string tabName, std::string colName);
-    int getMaxID(std::string tabName, std::string num);
+    int getMaxID(std::string tabName, std::string id);
 
     bool updateData(std::string tabName, std::string colName, 
         std::string sel, int id, auto& val);
     
+    int checkExistTable(std::string tabName);
+
     //void createUsersTable();
     //void createUserDataTable();
     //void createTestPassedTable();

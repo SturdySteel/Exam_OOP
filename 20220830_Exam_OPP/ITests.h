@@ -23,7 +23,9 @@ private:
 
 private:
 	TestLine* setTest(int i);
-	
+	void setIgrTest(GroupTest*& grTest, std::string str);
+	void setIsubGrTest(SubGroupTest*& grTest, std::string str, auto& sGj);
+
 public:
 	//ITests();
 	
