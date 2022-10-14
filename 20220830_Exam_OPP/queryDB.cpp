@@ -66,6 +66,13 @@ int QueryDB::getIdByLogin(std::string login) {
     return stmt == nullptr ? -1 : sqlite3_column_int(stmt, 0);
 }
 
+int QueryDB::getCountTest()
+{
+    sqlite3_stmt* stmt{ nullptr };
+    stmt = selectSQL("SELECT SUM(countTest) FROM tableGroupsTests;");
+    return sqlite3_column_int(stmt, 0);
+}
+
 int QueryDB::getMaxID(std::string tabName, std::string id)
 {
     sqlite3_stmt* stmt{ nullptr };

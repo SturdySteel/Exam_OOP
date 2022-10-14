@@ -10,7 +10,7 @@ class GroupTest
 private:
 	int idGrTest;
 	std::string nameGroup;
-	int countTest;
+	int countTest{ 1 };
 	std::string tableName;	
 	std::vector<SubGroupTest> arrSubGrTest;
 

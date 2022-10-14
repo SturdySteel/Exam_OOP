@@ -5,9 +5,9 @@ UserExten::UserExten(std::vector<std::vector<std::string>*> menuArr) :
 {}
 
 void UserExten::menu()
-{
+{	
 	while (true)
-	{
+	{		
 		system("cls");
 		int c = Menu::select_vertical(*menuArr[0], HorizontalAlignment::Left, 0);
 		switch (c)
@@ -18,6 +18,7 @@ void UserExten::menu()
 		default: break;
 		}
 	}
+	
 }
 
 void UserExten::usersMenu()
@@ -47,9 +48,9 @@ void UserExten::usersMenu()
 	}
 }
 
-void UserExten::testsMenu() 
-{
-	ITests tst;
+void UserExten::testsMenu()
+{	
+	ITests* tst = new ITests;
 	while (true) 	
 	{
 		system("cls");
@@ -57,12 +58,12 @@ void UserExten::testsMenu()
 		switch (c)
 		{
 		case 0:					
-			tst.getAllTests();
+			tst->getAllTests();
 			
 			system("pause");
 			break;
 		case 1:
-			tst.getGroupTest();
+			tst->getGroupTest();
 
 			system("pause");
 			break;
@@ -70,7 +71,7 @@ void UserExten::testsMenu()
 			if ((*menuArr[2]).size() == 3)
 				return;
 
-			tst.setAllTests();
+			tst->setAllTests();
 
 			system("pause");			
 			break;
@@ -80,6 +81,7 @@ void UserExten::testsMenu()
 			break;
 		}
 	}
+	delete tst;
 }
 //void UserExten::switcher(int c)
 //{

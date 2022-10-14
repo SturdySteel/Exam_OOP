@@ -39,7 +39,7 @@ public:
 
 	std::vector<GroupTest>& getGrTest();
 
-	ITests& getGroupTest();
+	void getGroupTest();
 
 	//~ITests();
 };
