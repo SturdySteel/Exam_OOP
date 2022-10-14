@@ -123,7 +123,7 @@ void QueryDB::createGroupTest(std::string str)
     return true;*/
 }
 
-bool QueryDB::createSubGroupTest(std::string str)
+void  QueryDB::createSubGroupTest(std::string str)
 {
     std::string query = "CREATE TABLE IF NOT EXISTS " + str +
         " (numTest Integer NOT NULL PRIMARY KEY AUTOINCREMENT, " + 
@@ -132,44 +132,64 @@ bool QueryDB::createSubGroupTest(std::string str)
         "countQuestions Integer NOT NULL, " + 
         "CONSTRAINT unique_tableNameTest UNIQUE(tableNameTest));";
     int rc = querySQL(query);
-    if (rc != 1)
+   /* if (rc != 1)
         return false;
-    return true;
+    return true;*/
 }
 
-bool QueryDB::createTest(std::string str)
+void QueryDB::createTest(std::string str)
 {
     std::string query = "CREATE TABLE IF NOT EXISTS " + str +
         " (numQ Integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
         " question Text, answer01 Text,	answer02 Text, answer03 Text," +
         " answer04 Text, rightAnswer Integer); ";
     int rc = querySQL(query);
-    if (rc != 1)
+    /*if (rc != 1)
         return false;
-    return true;
+    return true;*/
 }
 
+//---------- tableGroupsTests ------------
 void QueryDB::insertTableGroupsTest(const std::string& nameGroup, const int& countTest, 
     const std::string& tableName)
 {
-    std::string query = "INSERT INTO tableGroupsTests(nameGroup, countTest, tableName) VALUES('"+ 
-        nameGroup + "', '" + std::to_string(countTest) + "', '" + tableName + "');";
+    sqlite3_stmt* stmt{ nullptr };
+    std::string query{};
+    query = "SELECT * FROM tableGroupsTests WHERE tableName = '" + tableName + "';";    
+    stmt = selectSQL(query);
+    if (sqlite3_column_int(stmt, 3) == 0)
+    {
+        query = "INSERT INTO tableGroupsTests(nameGroup, countTest, tableName) VALUES('" +
+            nameGroup + "', '" + std::to_string(countTest) + "', '" + tableName + "');";
+        int rc = querySQL(query);
+    }
+    else
+    {
+        query = "UPDATE tableGroupsTests SET countTest = '" + std::to_string(countTest) 
+            + "' WHERE tableName ='" + tableName + "';";
+        int rc = querySQL(query);
+    }
 }
 
+//---------- Group --------------------
 void QueryDB::insertTableGroupTest(const std::string& tableName, 
     const std::string& nameGroupTest, const std::string& tableGroupTest)
 {
     std::string query = "INSERT INTO " + tableName  + " (nameGroupTest, tableGroupTest) VALUES('" +
         nameGroupTest + "', '" + tableGroupTest + "');";
+    int rc = querySQL(query);
 }
 
+//--------- SubGroup -------------------
 void QueryDB::insertTableSubGroupTest(const std::string& tableGroupTest, 
     const std::string& nameTest, const std::string& tableNameTest, const int& countQuestions)
 {
     std::string query = "INSERT INTO " + tableGroupTest + " (nameTest, tableNameTest, countQuestions) VALUES('" +
         nameTest + "', '" + tableNameTest + "', '" + std::to_string(countQuestions) + "');";
+    int rc = querySQL(query);
 }
 
+//---------- Test ---------------------
 void QueryDB::insertTableTests(const std::string& tableNameTest, const std::string& question, 
     const std::string& answer01, const std::string& answer02, 
     const std::string& answer03, const std::string& answer04, 
@@ -179,4 +199,5 @@ void QueryDB::insertTableTests(const std::string& tableNameTest, const std::stri
         " answer03, answer04, rightAnswer) VALUES('" + question + "', '" + answer01 + 
         "', '" + answer02 + "', '" + answer03 + "', '" + answer04 + "', '" + 
         std::to_string(rightAnswer) + "');";
+    int rc = querySQL(query);
 }

@@ -19,7 +19,7 @@
 //	name Text, 
 //	surname Text, 
 //	birthday Date, 
-//	registerDate Date, 
+//	registerDate Date DEFAULT(getdate()), 
 //	phone TEXT NOT NULL, 
 //	CONSTRAINT lnk_users_userData FOREIGN KEY(users_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE, 
 //	CONSTRAINT unique_phone UNIQUE(phone), CONSTRAINT unique_inn UNIQUE(inn), 

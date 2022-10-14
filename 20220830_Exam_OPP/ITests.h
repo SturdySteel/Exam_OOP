@@ -33,7 +33,7 @@ public:
 	void getAllTests();
 	void setAllTests();
 	//void getGroupsTest();
-	void insertTestToDB(GroupTest* grTest);
+	void insertTestToDB();
 
 	//void setGrTest(GroupTest& val);
 

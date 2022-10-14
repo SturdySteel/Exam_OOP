@@ -70,7 +70,7 @@ void ITests::setAllTests()
 	
 	//----Group----
 	GroupTest* grTest{ new GroupTest };
-	rgX = "(\[A-Яа-яA-Za-z]{5,})";
+	rgX = "(\[A-Яа-яA-Za-z ]{5,})";
 	str = dataEd->inputStr("Введите название группы тестов: ", rgX, 0);
 	std::transform(str.begin(), str.end(), str.begin(), [](char c) { return std::tolower(c); });
 	if (arrTests.size() > 0)
@@ -89,9 +89,10 @@ void ITests::setAllTests()
 		grTest->setTableName(dataEd->translitStr(str));
 		
 		int idGrTest = db->getMaxID("tableGroupsTests", "idGrTest"); 
-		idGrTest = (idGrTest == -1) ? 1 : ++idGrTest;
+		if (idGrTest == 0) 
+			idGrTest = arrTests.size();
 
-		//grTest->setCountTest(1);
+		grTest->setCountTest(1);
 		grTest->setIdGrTest(idGrTest);
 
 		arrTests.push_back(*grTest);
@@ -100,7 +101,7 @@ void ITests::setAllTests()
 			
 	//----SubGroup-----	
 	SubGroupTest* subGrTest{ new SubGroupTest };
-	rgX = "(\[A-Яа-яA-Za-z]{5,})";
+	rgX = "(\[A-Яа-яA-Za-z ]{5,})";
 	str = dataEd->inputStr("Введите название подгруппы тестов: ", rgX, 0);
 	std::transform(str.begin(), str.end(), str.begin(), [](char c) { return std::tolower(c); });
 	if (find)
@@ -123,7 +124,8 @@ void ITests::setAllTests()
 		subGrTest->setTableGroupTest(dataEd->translitStr(str));
 
 		int numGrTest = db->getMaxID(arrTests[j].getTableName(), "numGrTest");
-		numGrTest = numGrTest == -1 ? 1 : ++numGrTest;
+		if(numGrTest == -1)
+			numGrTest =  arrTests[j].getArrSubGrTest().size();
 
 		subGrTest->setNumGrTest(numGrTest);
 
@@ -134,18 +136,14 @@ void ITests::setAllTests()
 	//-----Test-----
 	//find = false;	
 	Test* test{ new Test };
-	rgX = "(\[A-Яа-яA-Za-z0-9]{4,})";
+	rgX = "(\[A-Яа-яA-Za-z0-9 ]{4,})";
 	str = dataEd->inputStr("Введите название теста: ", rgX, 0);
 	std::transform(str.begin(), str.end(), str.begin(), [](char c) { return std::tolower(c); });
 	test->setNameTest(str);
 	str = dataEd->translitStr(str);
 	int numTest{ (db->getMaxID(arrTests[j].getArrSubGrTest().at(k).getTableGroupTest(), "numTest"))};
-	if ( numTest == -1 )
-	{ 
-		numTest = arrTests[j].getArrSubGrTest().at(k).getNumGrTest();
-		if (find)
-			++numTest;			
-	}	
+	if ( numTest == -1 ) 
+		numTest = arrTests[j].getArrSubGrTest().at(k).getArrTests().size();
 	
 	test->setNumTest(numTest);
 	test->setTableNameTest(str+std::to_string(ITests::counter++));
@@ -179,7 +177,7 @@ TestLine* ITests::setTest(int i)
 	std::string str;	
 	std::regex rgX; // { R"(\w{5,})" };	
 	tL->setNumQ(i);	
-	rgX = "(\[A-Яа-яA-Za-z0-9]{5,})";
+	rgX = "(\[A-Яа-яA-Za-z0-9 ]{5,})";
 	str = dataEd->inputStr("Введите вопрос " + std::to_string(i+1) + " теста : ", rgX, 0);
 	tL->setQuestion(str);
 	str = dataEd->inputStr("Введите ответ 1: ", rgX, 1);
@@ -197,13 +195,21 @@ TestLine* ITests::setTest(int i)
 }
 
 
-void ITests::insertTestToDB(GroupTest* grTest)
+void ITests::insertTestToDB()
 {
+	if (arrTests.empty())
+		return;
+
 	QueryDB* db = QueryDB::getInstance();
-	std::string	select;
+	//std::string	select;
+
 	for (auto i : arrTests)
-	{
+	{		
+		i.getNameGroup();
+		i.getCountTest();
+		i.getTableName();
 		db->createGroupTest(i.getTableName());
+
 		for (auto j : i.getArrSubGrTest())
 		{
 			db->createSubGroupTest(j.getTableGroupTest());
@@ -242,7 +248,7 @@ void ITests::getGroupTest()
 		std::cout << "tableName = " << i.getTableName() << "\n";
 		for (auto j : i.getArrSubGrTest())
 		{
-			std::cout << " numGrTest = " << j.getNumGrTest() << " ";			
+			std::cout << "\n numGrTest = " << j.getNumGrTest() << " ";			
 			std::cout << " nameGroupTest = " << j.getNameGroupTest() << " ";
 			std::cout << " tableGroupTest = " << j.getTableGroupTest() << "\n";
 			for (auto k : j.getArrTests())
@@ -255,14 +261,15 @@ void ITests::getGroupTest()
 				std::cout << "\n" << "  Название теста: " << k.getNameTest() << std::endl;
 				for (auto l : k.getArrTestLines())
 				{					
-					std::cout << l.getNumQ() << "." << l.getQuestion() << ":";
+					std::cout << "   " <<l.getNumQ() << "." << l.getQuestion() << ":";
 					std::cout << "\n   Варианты:\n   1: " << l.getAnswer01() << "\n   2: "
 						<< l.getAnswer02() << "\n   3: " << l.getAnswer03()
 						<< "\n   4: " << l.getAnswer04() << "\n" << "   Right: " 
 						<< l.getRightAnswer() <<"\n" << std::endl;
-				}
+				}				
 			}
 		}
+		std::cout << "======================================================" << std::endl;
 	}
  
 	//return *this;

@@ -41,8 +41,8 @@ public:
     //void createTableGroupsTests();
         
     void createGroupTest(std::string str);
-    bool createSubGroupTest(std::string str);
-    bool createTest(std::string str);
+    void createSubGroupTest(std::string str);
+    void createTest(std::string str);
     
     void insertTableGroupsTest(const std::string& nameGroup, const int& countTest, 
         const std::string& tableName);

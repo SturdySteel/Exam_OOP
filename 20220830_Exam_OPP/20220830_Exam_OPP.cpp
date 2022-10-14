@@ -66,7 +66,16 @@ int main()
     UserLogin usr;
     AdminExten adm{ admMenuArr };
     UserExten user{ userMenuArr };
-       
+
+    /*{
+        sqlite3_stmt* stmt{ nullptr };
+        std::string tableName = "matem";
+        QueryDB* db = QueryDB::getInstance();
+        std::string query = "SELECT * FROM tableGroupsTests WHERE tableName = '" + tableName + "';";
+        stmt = db->selectSQL(query);
+        std::cout << (sqlite3_column_int(stmt, 3))<<"\n";
+    }*/
+
     //system("pause");
     //DEBUG. comment for run normaly 
     adm.menu();
