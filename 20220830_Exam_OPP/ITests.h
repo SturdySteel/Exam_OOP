@@ -28,7 +28,7 @@ private:
 	//void setIsubGrTest(SubGroupTest*& grTest, std::string str, auto& sGj);
 
 public:
-	ITests();
+	//ITests();
 	
 	void getAllTests();
 	void setAllTests();

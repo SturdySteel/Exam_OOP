@@ -23,7 +23,7 @@ bool DataEdit::create() {
 		select = "SELECT * FROM users WHERE login='" + login + "';";
 		stmt = db->selectSQL(select);
 		if (sqlite3_column_int(stmt, 0) == 0)
-			break;
+			break;	
 		else
 		{
 			std::cout << "Такой логин зарегистрирован"; Sleep(1500);
@@ -35,7 +35,7 @@ bool DataEdit::create() {
 	if (!db->querySQL(insert))
 		return 0;
 	int id = db->getIdByLogin(login);
-
+	
 	do {
 		rgX = R"(\d{10})";
 		inn = inputStr("ИНН (10 цифр): ", rgX, 3);
@@ -47,7 +47,7 @@ bool DataEdit::create() {
 			std::cout << "Такой ИНН зарегистрирован"; Sleep(1500);
 		}
 	} while (true);
-
+	
 	do {
 		rgX = R"(\d{10,12})";
 		phone = inputStr("Телефон (10-12 цифр): ", rgX, 4);
@@ -70,8 +70,10 @@ bool DataEdit::create() {
 	insert = "INSERT INTO USERDATA(users_id,inn,name,surname,birthday,registerDate,phone) VALUES ('"
 		+ std::to_string(id) + "','" + inn + "','" + name + "','" + surname + "','"
 		+ birthday + "','" + registerDate + "','" + phone + "');";
+	
 	if (!db->querySQL(insert))
 		return 0;
+
 	sqlite3_finalize(stmt);
 	return 1;
 

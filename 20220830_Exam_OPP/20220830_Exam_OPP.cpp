@@ -76,10 +76,19 @@ int main()
         std::cout << (sqlite3_column_int(stmt, 3))<<"\n";
     }*/
 
+    /*{
+        DataEdit* dataEd = DataEdit::getInstance();
+        QueryDB* db = QueryDB::getInstance();
+        std::string str = "математика";
+        std::string str1 = dataEd->translitStr(str);
+        db->insertTableGroupsTests(str, 1, str1);
+        db->createGroupTest(str1);
+     }*/
+
     //system("pause");
     //DEBUG. comment for run normaly 
-    adm.menu();
-    exit(0);
+    //adm.menu();
+    //exit(0);
     //////////////////////////////
     
     while (true) {       

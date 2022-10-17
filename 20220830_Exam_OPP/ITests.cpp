@@ -8,11 +8,12 @@ int ITests::counter = 0;
 	//testLine{ new TestLine }
 	//allTests{ new std::vector<GroupsTests> }
 
-ITests::ITests()	//need uncomment !!!!
-{
-	QueryDB* db = QueryDB::getInstance();
-	ITests::counter = db->getCountTest();	
-}
+//ITests::ITests()	//need uncomment !!!!
+//{
+//	QueryDB* db = QueryDB::getInstance();
+//	ITests::counter = db->getCountTest();
+//	delete db;
+//}
 
 //ITests::~ITests()
 //{
@@ -88,7 +89,7 @@ void ITests::setAllTests()
 		grTest->setNameGroup(str);
 		grTest->setTableName(dataEd->translitStr(str));
 		
-		int idGrTest = db->getMaxID("tableGroupsTests", "idGrTest"); 
+		int idGrTest{};/*{ db->getMaxID("tableGroupsTests", "idGrTest") };*/
 		if (idGrTest == 0) 
 			idGrTest = arrTests.size();
 
@@ -123,7 +124,7 @@ void ITests::setAllTests()
 		subGrTest->setNameGroupTest(str);
 		subGrTest->setTableGroupTest(dataEd->translitStr(str));
 
-		int numGrTest = db->getMaxID(arrTests[j].getTableName(), "numGrTest");
+		int numGrTest{}; /*{ db->getMaxID(arrTests[j].getTableName(), "numGrTest") };*/
 		if(numGrTest == -1)
 			numGrTest =  arrTests[j].getArrSubGrTest().size();
 
@@ -141,7 +142,7 @@ void ITests::setAllTests()
 	std::transform(str.begin(), str.end(), str.begin(), [](char c) { return std::tolower(c); });
 	test->setNameTest(str);
 	str = dataEd->translitStr(str);
-	int numTest{ (db->getMaxID(arrTests[j].getArrSubGrTest().at(k).getTableGroupTest(), "numTest"))};
+	int numTest{};/*{ (db->getMaxID(arrTests[j].getArrSubGrTest().at(k).getTableGroupTest(), "numTest"))};*/
 	if ( numTest == -1 ) 
 		numTest = arrTests[j].getArrSubGrTest().at(k).getArrTests().size();
 	
@@ -160,7 +161,11 @@ void ITests::setAllTests()
 	}
 	
 	arrTests[j].getArrSubGrTest().at(k).getArrTests().push_back(*test);
-	
+	//delete db;
+	/*delete dataEd;*/
+
+	insertTestToDB();
+
 	delete grTest;
 	delete subGrTest;
 	delete test;
@@ -204,21 +209,24 @@ void ITests::insertTestToDB()
 	//std::string	select;
 
 	for (auto i : arrTests)
-	{		
-		i.getNameGroup();
-		i.getCountTest();
-		i.getTableName();
+	{	
+		db->insertTableGroupsTests(i.getNameGroup(), i.getCountTest(), i.getTableName());
 		db->createGroupTest(i.getTableName());
 
 		for (auto j : i.getArrSubGrTest())
 		{
+			db->insertTableGroupTest(i.getTableName(), j.getNameGroupTest(), j.getTableGroupTest());
 			db->createSubGroupTest(j.getTableGroupTest());
 			for (auto k : j.getArrTests())
 			{
+				db->insertTableSubGroupTest(j.getTableGroupTest(), k.getNameTest(),
+					k.getTableNameTest(), k.getCountQuestions());
 				db->createTest(k.getTableNameTest());
 				for (auto l : k.getArrTestLines())
 				{
-
+					db->insertTableTests(k.getTableNameTest(),
+						l.getQuestion(), l.getAnswer01(), l.getAnswer02(),
+						l.getAnswer03(), l.getAnswer04(), l.getRightAnswer());
 				}
 			}
 		}

@@ -50,7 +50,7 @@ void UserExten::usersMenu()
 
 void UserExten::testsMenu()
 {	
-	ITests* tst = new ITests;
+	ITests tst;/* = new ITests;*/
 	while (true) 	
 	{
 		system("cls");
@@ -58,12 +58,12 @@ void UserExten::testsMenu()
 		switch (c)
 		{
 		case 0:					
-			tst->getAllTests();
+			tst.getAllTests();
 			
 			system("pause");
 			break;
 		case 1:
-			tst->getGroupTest();
+			tst.getGroupTest();
 
 			system("pause");
 			break;
@@ -71,7 +71,7 @@ void UserExten::testsMenu()
 			if ((*menuArr[2]).size() == 3)
 				return;
 
-			tst->setAllTests();
+			tst.setAllTests();
 
 			system("pause");			
 			break;
@@ -81,7 +81,7 @@ void UserExten::testsMenu()
 			break;
 		}
 	}
-	delete tst;
+	//delete tst;
 }
 //void UserExten::switcher(int c)
 //{

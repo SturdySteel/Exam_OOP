@@ -19,6 +19,7 @@ private:
 private:
     QueryDB() {}
     int callback(void* NotUsed, int argc, char** argv, char** azColName);
+    int checkExistTable(std::string tabName);
 
 public:
     static QueryDB* getInstance();
@@ -33,8 +34,6 @@ public:
     bool updateData(std::string tabName, std::string colName, 
         std::string sel, int id, auto& val);
     
-    int checkExistTable(std::string tabName);
-
     //void createUsersTable();
     //void createUserDataTable();
     //void createTestPassedTable();
@@ -44,7 +43,7 @@ public:
     void createSubGroupTest(std::string str);
     void createTest(std::string str);
     
-    void insertTableGroupsTest(const std::string& nameGroup, const int& countTest, 
+    void insertTableGroupsTests(const std::string& nameGroup, const int& countTest, 
         const std::string& tableName);
 
     void insertTableGroupTest(const std::string& tableName, const std::string& nameGroupTest, 

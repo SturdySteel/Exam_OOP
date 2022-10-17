@@ -19,7 +19,7 @@
 //	name Text, 
 //	surname Text, 
 //	birthday Date, 
-//	registerDate Date DEFAULT(getdate()), 
+//	registerDate Date,
 //	phone TEXT NOT NULL, 
 //	CONSTRAINT lnk_users_userData FOREIGN KEY(users_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE, 
 //	CONSTRAINT unique_phone UNIQUE(phone), CONSTRAINT unique_inn UNIQUE(inn), 
@@ -37,13 +37,14 @@
 //	passed Boolean NOT NULL, 
 //	CONSTRAINT lnk_users_testPassed FOREIGN KEY(users_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE, 
 //	CONSTRAINT lnk_testPassed_tableGroupsTests FOREIGN KEY(groupNum) REFERENCES tableGroupsTests(idGrTest), 
+//	CONSTRAINT unique_num UNIQUE(num)),
 //	CONSTRAINT lnk_testPassed_mathematics FOREIGN KEY(subGroupNum) REFERENCES mathematics(numGrTest), 
 //	CONSTRAINT lnk_testPassed_physics FOREIGN KEY(subGroupNum) REFERENCES physics(numGrTest), 
 //	CONSTRAINT lnk_testPassed_mathDiscrete FOREIGN KEY(testNum) REFERENCES mathDiscrete(numTest), 
 //	CONSTRAINT lnk_testPassed_mathAnalysis FOREIGN KEY(testNum) REFERENCES mathAnalysis(numTest), 
 //	CONSTRAINT lnk_testPassed_phisicsQuant FOREIGN KEY(testNum) REFERENCES phisicsQuant(numTest), 
-//	CONSTRAINT lnk_testPassed_phisicsMech FOREIGN KEY(testNum) REFERENCES phisicsMech(numTest), 
-//	CONSTRAINT unique_num UNIQUE(num))
+//	CONSTRAINT lnk_testPassed_phisicsMech FOREIGN KEY(testNum) REFERENCES phisicsMech(numTest)
+	
 
 /*---tableGroups----*/
 //CREATE TABLE IF NOT EXISTS tableGroupsTests(
