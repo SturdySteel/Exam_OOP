@@ -31,7 +31,7 @@ private:
 	
 public:
 	AdminExten(std::vector<std::vector<std::string>*> menuArr) : UserExten(menuArr) {}
-
+	void testsMenu() override;
 };
 
 #endif // !USEREXTEN_H

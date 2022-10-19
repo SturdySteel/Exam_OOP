@@ -3,6 +3,7 @@
 #include <fstream>
 #include <locale>
 #include <regex>
+#include <iomanip>
 #include "GroupTest.h"
 #include "SubGroupTest.h"
 #include "Test.h"
@@ -10,6 +11,7 @@
 #include "queryDB.h"
 #include "typeinfo"
 #include "DataEdit.h"
+
 //#include <boost/locale.hpp>
 
 class ITests
@@ -26,20 +28,21 @@ private:
 	TestLine* setTest(int i);
 	//void setIgrTest(GroupTest*& grTest, std::string str);
 	//void setIsubGrTest(SubGroupTest*& grTest, std::string str, auto& sGj);
+	void insertTestToDB();
 
 public:
-	//ITests();
+	ITests();
 	
 	void getAllTests();
 	void setAllTests();
 	//void getGroupsTest();
-	void insertTestToDB();
-
+	
 	//void setGrTest(GroupTest& val);
 
 	std::vector<GroupTest>& getGrTest();
 
-	void getGroupTest();
+	void getGroupTest(bool tline = 1);
+	void fillArrTests();
 
 	//~ITests();
 };

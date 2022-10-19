@@ -17,13 +17,14 @@ class UserLogin
 {
 private:
 	std::string login{};
-	std::string pass{};
-	bool superuser{ false };
+	std::string pass{};	
+	
 	UserData* dataUL{ nullptr };
 
 public:
+	static bool superuser;
 	static int id;
-
+	
 public:
 	UserLogin() {}
 	UserLogin(UserLogin& obj);

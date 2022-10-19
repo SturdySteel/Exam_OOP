@@ -1,6 +1,7 @@
 #include "UserLogin.h"
 
 int UserLogin::id{ 0 };
+bool UserLogin::superuser{ false };
 
 UserLogin::UserLogin(UserLogin& obj)
 {
@@ -125,7 +126,7 @@ bool UserLogin::autorization()
 	}
 	this->login = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
 	this->pass = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2));
-	this->superuser = sqlite3_column_int(stmt, 3);
+	UserLogin::superuser = sqlite3_column_int(stmt, 3);
 	stmt = nullptr;
 	select = "SELECT * FROM userdata WHERE users_id ='" + std::to_string(this->id)+ "';";
 	stmt = db->selectSQL(select);

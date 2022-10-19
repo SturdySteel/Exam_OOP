@@ -67,24 +67,7 @@ int main()
     AdminExten adm{ admMenuArr };
     UserExten user{ userMenuArr };
 
-    /*{
-        sqlite3_stmt* stmt{ nullptr };
-        std::string tableName = "matem";
-        QueryDB* db = QueryDB::getInstance();
-        std::string query = "SELECT * FROM tableGroupsTests WHERE tableName = '" + tableName + "';";
-        stmt = db->selectSQL(query);
-        std::cout << (sqlite3_column_int(stmt, 3))<<"\n";
-    }*/
-
-    /*{
-        DataEdit* dataEd = DataEdit::getInstance();
-        QueryDB* db = QueryDB::getInstance();
-        std::string str = "математика";
-        std::string str1 = dataEd->translitStr(str);
-        db->insertTableGroupsTests(str, 1, str1);
-        db->createGroupTest(str1);
-     }*/
-
+    
     //system("pause");
     //DEBUG. comment for run normaly 
     //adm.menu();
@@ -95,7 +78,7 @@ int main()
         usr.menuMain(mainMenu);
         //user.show();
 
-        switch (usr.getSU()) {
+        switch (UserLogin::superuser) {
         case true:
             
             adm.menu();
@@ -103,7 +86,7 @@ int main()
             break;
         case false:
             user.menu();
-            std::cout << usr.getLogin() << "\n";
+            //std::cout << usr.getLogin() << "\n";
             break;        
         }
     }

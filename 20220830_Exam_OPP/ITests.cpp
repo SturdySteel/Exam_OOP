@@ -8,12 +8,11 @@ int ITests::counter = 0;
 	//testLine{ new TestLine }
 	//allTests{ new std::vector<GroupsTests> }
 
-//ITests::ITests()	//need uncomment !!!!
-//{
-//	QueryDB* db = QueryDB::getInstance();
-//	ITests::counter = db->getCountTest();
-//	delete db;
-//}
+ITests::ITests()	//need uncomment !!!!
+{
+	QueryDB* db = QueryDB::getInstance();
+	ITests::counter = db->getCountTest();		
+}
 
 //ITests::~ITests()
 //{
@@ -48,10 +47,10 @@ void ITests::getAllTests()
 	if (sqlite3_column_int(stmt, 0) == 0)
 		return;
 	do {
-		std::cout << sqlite3_column_int(stmt, 0) << "  "
-			<< reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1))
-			<< "  " << sqlite3_column_int(stmt, 2) << "  "
-			<< (sqlite3_column_text(stmt, 3)) << " \n ";
+		std::cout << sqlite3_column_int(stmt, 0) <<"  "
+			<< reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1)) << std::endl;
+			/*<< "  " << sqlite3_column_int(stmt, 2) << "  "
+			<< (sqlite3_column_text(stmt, 3)) << " \n ";*/
 		
 	} while (sqlite3_step(stmt) != SQLITE_DONE);
 	
@@ -89,7 +88,7 @@ void ITests::setAllTests()
 		grTest->setNameGroup(str);
 		grTest->setTableName(dataEd->translitStr(str));
 		
-		int idGrTest{};/*{ db->getMaxID("tableGroupsTests", "idGrTest") };*/
+		int idGrTest{ db->getMaxID("tableGroupsTests", "idGrTest") };
 		if (idGrTest == 0) 
 			idGrTest = arrTests.size();
 
@@ -124,7 +123,7 @@ void ITests::setAllTests()
 		subGrTest->setNameGroupTest(str);
 		subGrTest->setTableGroupTest(dataEd->translitStr(str));
 
-		int numGrTest{}; /*{ db->getMaxID(arrTests[j].getTableName(), "numGrTest") };*/
+		int numGrTest{ db->getMaxID(arrTests[j].getTableName(), "numGrTest") };
 		if(numGrTest == -1)
 			numGrTest =  arrTests[j].getArrSubGrTest().size();
 
@@ -142,8 +141,7 @@ void ITests::setAllTests()
 	std::transform(str.begin(), str.end(), str.begin(), [](char c) { return std::tolower(c); });
 	test->setNameTest(str);
 	str = dataEd->translitStr(str);
-	int numTest{};/*{ (db->getMaxID(arrTests[j].getArrSubGrTest().at(k).getTableGroupTest(), "numTest"))};*/
-	if ( numTest == -1 ) 
+	int numTest{ (db->getMaxID(arrTests[j].getArrSubGrTest().at(k).getTableGroupTest(), "numTest"))};
 		numTest = arrTests[j].getArrSubGrTest().at(k).getArrTests().size();
 	
 	test->setNumTest(numTest);
@@ -165,15 +163,12 @@ void ITests::setAllTests()
 	/*delete dataEd;*/
 
 	insertTestToDB();
+	
 
 	delete grTest;
 	delete subGrTest;
 	delete test;
 }
-
-//db->createGroupTest(grTest->getTableName());
-//db->insertTableGroupsTest(grTest->getNameGroup(), grTest->getCountTest(), grTest->getTableName());
-//idGrTest = db->getMaxID("tableGroupsTests", "idGrTest");
 
 TestLine* ITests::setTest(int i)
 {		
@@ -231,6 +226,7 @@ void ITests::insertTestToDB()
 			}
 		}
 	}
+	arrTests.clear();
 }
 
 //void ITests::setGrTest(GroupTest& val) 
@@ -243,23 +239,24 @@ std::vector<GroupTest>& ITests::getGrTest()
 	return this->arrTests;
 }
 
-void ITests::getGroupTest() 
+void ITests::getGroupTest(bool tline) 
 {	
-	if (arrTests.empty())
-		return;
-	
-	for (auto i : arrTests)
+	/*if (arrTests.empty())
+		return;*/
+	fillArrTests();
+
+	for (auto &i : arrTests)
 	{
 		std::cout << "idGrTest = " << i.getIdGrTest() << " ";
 		std::cout << "nameGroup = " << i.getNameGroup() << " ";
 		std::cout << "countTest = " << i.getCountTest() << " ";
 		std::cout << "tableName = " << i.getTableName() << "\n";
-		for (auto j : i.getArrSubGrTest())
+		for (auto &j : i.getArrSubGrTest())
 		{
 			std::cout << "\n numGrTest = " << j.getNumGrTest() << " ";			
 			std::cout << " nameGroupTest = " << j.getNameGroupTest() << " ";
 			std::cout << " tableGroupTest = " << j.getTableGroupTest() << "\n";
-			for (auto k : j.getArrTests())
+			for (auto &k : j.getArrTests())
 			{
 				std::cout << "\n  numTest = " << k.getNumTest() << " ";
 				std::cout << "  nameTest = " << k.getNameTest() << " ";
@@ -267,19 +264,100 @@ void ITests::getGroupTest()
 				std::cout << "  countQuestions = " << k.getCountQuestions() << "\n";
 
 				std::cout << "\n" << "  Название теста: " << k.getNameTest() << std::endl;
-				for (auto l : k.getArrTestLines())
-				{					
-					std::cout << "   " <<l.getNumQ() << "." << l.getQuestion() << ":";
-					std::cout << "\n   Варианты:\n   1: " << l.getAnswer01() << "\n   2: "
-						<< l.getAnswer02() << "\n   3: " << l.getAnswer03()
-						<< "\n   4: " << l.getAnswer04() << "\n" << "   Right: " 
-						<< l.getRightAnswer() <<"\n" << std::endl;
-				}				
+				if (tline)
+					for (auto &l : k.getArrTestLines())
+					{
+						std::cout << "   " << l.getNumQ() << "." << l.getQuestion() << "";
+						std::cout << "\n    Варианты:\n    1: " << l.getAnswer01() << "\n    2: "
+							<< l.getAnswer02() << "\n    3: " << l.getAnswer03()
+							<< "\n    4: " << l.getAnswer04() << "\n" 
+							/* << "   Right: " << l.getRightAnswer() << "\n"*/ 
+							<< std::endl;
+					}
 			}
 		}
 		std::cout << "======================================================" << std::endl;
-	}
- 
+	} 
 	//return *this;
+}
+
+void ITests::fillArrTests()
+{
+	this->arrTests.clear();
+	QueryDB* db = QueryDB::getInstance();
+	DataEdit* dataEd = DataEdit::getInstance();
+	sqlite3_stmt* stmt{ nullptr };
+	std::string	select;
+	
+	GroupTest* grTest{ new GroupTest };
+	SubGroupTest* subGrTest{ new SubGroupTest };
+	Test* test{ new Test };
+	TestLine* tL{ new TestLine };
+
+	select = "SELECT * FROM tableGroupsTests;";
+	stmt = db->selectSQL(select);
+	do {
+		grTest->setIdGrTest(sqlite3_column_int(stmt, 0));
+		grTest->setNameGroup(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1)));
+		grTest->setCountTest(sqlite3_column_int(stmt, 2));
+		grTest->setTableName(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3)));
+		arrTests.push_back(*grTest);
+	} while (sqlite3_step(stmt) != SQLITE_DONE);
+	sqlite3_finalize(stmt);
+
+	for (auto &i : arrTests)
+	{
+		select = "SELECT * FROM " + i.getTableName() + ";";
+		stmt = db->selectSQL(select);
+		do {
+			subGrTest->setNumGrTest(sqlite3_column_int(stmt, 0));
+			subGrTest->setNameGroupTest(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1)));
+			subGrTest->setTableGroupTest(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2)));
+			i.setSubGrTest(*subGrTest);
+		} while (sqlite3_step(stmt) != SQLITE_DONE);
+	}
+	sqlite3_finalize(stmt);
+
+	for (auto &i : arrTests)
+	{
+		for (auto &j : i.getArrSubGrTest())
+		{
+			select = "SELECT * FROM " + j.getTableGroupTest() + ";";
+			stmt = db->selectSQL(select);
+			do {
+				test->setNumTest(sqlite3_column_int(stmt, 0));
+				test->setNameTest(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1)));
+				test->setTableNameTest(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2)));
+				test->setCountQuestions(sqlite3_column_int(stmt, 3));
+				j.setTests(*test);
+			} while (sqlite3_step(stmt) != SQLITE_DONE);
+		}
+	}
+	sqlite3_finalize(stmt);
+
+	
+	for (auto &i : arrTests)
+		for (auto &j : i.getArrSubGrTest())
+			for (auto &k : j.getArrTests())
+			{				
+				select = "SELECT * FROM " + k.getTableNameTest() + ";";
+				stmt = db->selectSQL(select);
+				do {
+					tL->setNumQ(sqlite3_column_int(stmt, 0));
+					tL->setQuestion(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1)));
+					tL->setAnswer01(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2)));
+					tL->setAnswer02(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3)));
+					tL->setAnswer03(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 4)));
+					tL->setAnswer04(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 5)));
+					tL->setRightAnswer(sqlite3_column_int(stmt, 6));
+					k.setTestLine(tL);
+				} while (sqlite3_step(stmt) != SQLITE_DONE);			
+			}
+	sqlite3_finalize(stmt);
+
+	delete grTest;
+	delete subGrTest;
+	delete test;
+	delete tL;
 }
 
