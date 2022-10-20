@@ -50,7 +50,7 @@ void UserExten::usersMenu()
 
 void UserExten::testsMenu()
 {	
-	//ITests* tst = new ITests;
+	ITests* tst = new ITests;
 	while (true) 	
 	{
 		system("cls");
@@ -59,21 +59,18 @@ void UserExten::testsMenu()
 		{
 		case 0:					
 			//tst->getAllTests();
-			
+			tst->getGroupTest();
 			system("pause");
 			break;
 		case 1:
-			//tst->getGroupTest();
-
+			
 			system("pause");
 			break;
 		case 2:
 			if ((*menuArr[2]).size() == 3)
 				return;
-
-			//tst->setAllTests();
-
-			system("pause");			
+			
+			//system("pause");			
 			break;
 		case 3:
 			return;
@@ -81,7 +78,7 @@ void UserExten::testsMenu()
 			break;
 		}
 	}
-	//delete tst;
+	delete tst;
 }
 
 

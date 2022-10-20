@@ -2,45 +2,17 @@
 
 int ITests::counter = 0;
 
-//grTest{ new GroupTest },
-	//subGrTest{ new SubGroupTest },
-	//test{ new Test }
-	//testLine{ new TestLine }
-	//allTests{ new std::vector<GroupsTests> }
-
 ITests::ITests()	//need uncomment !!!!
 {
 	QueryDB* db = QueryDB::getInstance();
 	ITests::counter = db->getCountTest();		
 }
 
-//ITests::~ITests()
-//{
-//	if (grTest != nullptr)
-//		delete grTest;
-//	if (subGrTest != nullptr)
-//		delete subGrTest;
-//	if (test != nullptr)
-//		delete test;
-//	/*if (testLine != nullptr)
-//		delete testLine;*/
-//	/*if (allTests != nullptr)
-//		delete allTests;*/
-//}
-
-
 void ITests::getAllTests()
 {
 	QueryDB* db = QueryDB::getInstance();
 	std::string	select;
 		
-	/*std::string nameGroupS{ "Астрономия2" }, tableNameS{ "astro0003" };
-	int countTestS{ 4 };
-	
-	select = "INSERT INTO tableGroupsTests(nameGroup, countTest, tableName) VALUES('"
-		+ nameGroupS + "', '" + std::to_string(countTestS) + "', '" + tableNameS + "');";
-	db->querySQL(select);*/
-	
 	sqlite3_stmt* stmt{ nullptr };
 	select = "SELECT * FROM tableGroupsTests;";	
 	stmt = db->selectSQL(select);
@@ -159,12 +131,9 @@ void ITests::setAllTests()
 	}
 	
 	arrTests[j].getArrSubGrTest().at(k).getArrTests().push_back(*test);
-	//delete db;
-	/*delete dataEd;*/
 
 	insertTestToDB();
 	
-
 	delete grTest;
 	delete subGrTest;
 	delete test;

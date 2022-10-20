@@ -10,6 +10,7 @@
 #include "queryDB.h"
 #include "ManipulCursor.h"
 #include "DataEdit.h"
+#include "TestPassed.h"
 
 //typedef std::basic_string <unsigned char> ustring;
 
@@ -20,6 +21,7 @@ private:
 	std::string pass{};	
 	
 	UserData* dataUL{ nullptr };
+	std::vector<TestPassed> testPass;
 
 public:
 	static bool superuser;

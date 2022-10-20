@@ -141,6 +141,7 @@
     <ClCompile Include="SubGroupTest.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="TestLine.cpp" />
+    <ClCompile Include="TestPassed.cpp" />
     <ClCompile Include="transLit.cpp" />
     <ClCompile Include="UserData.cpp" />
     <ClCompile Include="UserExten.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="SubGroupTest.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="TestLine.h" />
+    <ClInclude Include="TestPassed.h" />
     <ClInclude Include="UserData.h" />
     <ClInclude Include="UserExten.h" />
     <ClInclude Include="UserLogin.h" />

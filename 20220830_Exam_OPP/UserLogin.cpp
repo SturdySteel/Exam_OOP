@@ -143,8 +143,18 @@ bool UserLogin::autorization()
 		reinterpret_cast<const char*>(sqlite3_column_text(stmt, 4)),
 		reinterpret_cast<const char*>(sqlite3_column_text(stmt, 5)),
 		reinterpret_cast<const char*>(sqlite3_column_text(stmt, 6)));
-
 	sqlite3_finalize(stmt);
+
+	select = "SELECT * FROM testPassed WHERE users_id ='" + std::to_string(this->id) + "';";
+	stmt = db->selectSQL(select);
+	
+	do	{
+		TestPassed* tP = new TestPassed{ sqlite3_column_int(stmt, 0), sqlite3_column_int(stmt, 2), 
+		sqlite3_column_int(stmt, 3), sqlite3_column_int(stmt, 4), sqlite3_column_int(stmt, 5), 
+		sqlite3_column_int(stmt, 6), sqlite3_column_int(stmt, 7), (bool)sqlite3_column_int(stmt, 8) };
+		testPass.push_back(*tP);
+		delete tP;
+	} while (sqlite3_step(stmt) != SQLITE_DONE);
 	return 1;
 }
 
